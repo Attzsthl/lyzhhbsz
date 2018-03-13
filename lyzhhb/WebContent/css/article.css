@@ -1,0 +1,121 @@
+/*初始化*/
+body,form,fieldset,table,td,img,div,dl,dt,dd,input,a{
+	margin:0;
+	padding:0;
+	}
+	img{border:none;}
+li{list-style:none;}
+input,select,textarea{outline:none;border: none;}
+textarea{resize:none;}
+a{text-decoration:none;cursor: pointer}
+body{
+	background-color: #E0F0DC;
+}
+
+
+/*清除浮动、浮动*/
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom: 1;}
+.fl{float: left}
+.fr{float: right;}
+
+
+input::-webkit-input-placeholder { /* WebKit browsers */ 
+color: rgb(230,230,230); 
+font-size: 14px;
+} 
+/*head*/
+.head{
+	height: 100px;
+	width: 100%;
+	background-color: #EC7676;
+	position: relative;
+	z-index: 99;
+	background: url(../images/pexels-photo-192136.jpg);
+	-webkit-background-size: 100%;
+	background-size: 100%;
+	background-position: 0 70%;
+	box-shadow: 1px 1px 4px #CAD7BD;
+}
+.title{
+	float: left;
+	height: 100px;
+	background: url(../images/logo2.png) 20px center;
+	background-repeat: no-repeat;
+	background-size: 80px;
+	padding-left: 110px;
+	line-height: 100px;
+	font-size: 24px;
+	font-family: inherit;
+	font-weight: 800;
+	color: #fff;
+	margin-right: 0px;
+}
+.art{
+	width: 900px;
+	padding:10px 80px;
+	margin-left: 80px;
+}
+.art h1{
+	font-size: 45px;
+	text-align: center;
+}
+.art span{
+	color: #60635C;
+	font-size: 15px;
+	padding-left: 325px;
+}
+.art p{
+	padding-left: 25px;
+	text-indent:2em;
+	line-height: 30px;
+}
+.art img{
+	width: 640px;
+	margin-left: 130px;
+}
+
+.lead{
+	position: fixed;
+	top: 170px;
+	left: 1100px;
+	border: solid 2px #BDC8B0;
+	border-radius: 5px;
+	padding: 0;
+}
+.lead li{
+	height: 40px;
+	background-color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+	margin: 2px 2px;
+}
+.lead li:hover{
+	background-color: #C9D3C6;
+}
+.lead a{
+	height: 100%;
+	width: 100%;
+	line-height: 40px;
+	border-radius: 3px;
+	display: block;
+	padding:0 15px;
+	color: #000;
+	
+}
+.lead a:hover{
+	color: #000;
+}
+.lead a:visited{
+	color: #000;
+}
+.place{
+	font-size: 15px;
+	margin-left: 150px;
+	margin-top: 20px;
+	border-left: solid #5A2323 8px;
+	height: 13px;
+	line-height: 13px;
+	padding: 10px;
+}

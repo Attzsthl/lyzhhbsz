@@ -1,0 +1,51 @@
+<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+table.hovertable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.hovertable th {
+	background-color:#c3dde0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr {
+	background-color:#d4e3e5;
+}
+table.hovertable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr:hover{
+	background-color: #0095CC;
+}
+#selectlayer select {
+    height: 25px;
+    width: 100px;
+    border-radius: 3px;
+    margin-left: 30px;
+}
+#selectlayer {
+    font-size: 15px;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+#selectlayer {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+#selectlayer select {
+    margin-left: 32px;
+}
+/* input[type="checkbox"]{appearance: none; -webkit-appearance: none;outline: none;display:none}
+label{width:20px;height:20px;display:inline-block;cursor:pointer;}
+label input[type="checkbox"] + span{width:20px;height:20px;display:inline-block;background:url(images/checkbox_01.gif)  no-repeat;background-position:0 0;}
+label input[type="checkbox"]:checked + span{background-position:0 -21px} */

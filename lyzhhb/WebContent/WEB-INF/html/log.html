@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <link href="app/css/bootstrap.min.css" rel="stylesheet">
+	    <link rel="shortcut icon" href="app/img/favicon.ico" type="image/x-icon" />
+	    <script src="app/js/jquery-3.1.1.min.js"></script>
+		<script src="app/js/bootstrap.min.js"></script>
+		<meta charset="UTF-8">
+		<title></title>
+
+	</head>
+	<body>
+		<div style="width: 280px;margin:auto;margin-top: 20px">
+			起始日期	<br />
+			<select id='year1'></select>&nbsp;&nbsp;年&nbsp;&nbsp;<select id='month1'></select>&nbsp;&nbsp;月&nbsp;&nbsp;<select id='day1'></select>&nbsp;&nbsp;日	<br />
+			<br />
+			终止日期	<br />
+			<select id='year2'></select>&nbsp;&nbsp;年&nbsp;&nbsp;<select id='month2'></select>&nbsp;&nbsp;月&nbsp;&nbsp;<select id='day2'></select>&nbsp;&nbsp;日	<br />
+			<input onclick="download()" style="margin-top: 50px;margin-right:10px;float: right;" type="button" class="btn btn-info" value="下载日志"/>
+		</div>
+		<script>
+				var myDate = new Date();
+				var nowyear=myDate.getFullYear();
+				var nowmonth=myDate.getMonth()+1;
+				var nowdate=myDate.getDate();
+				
+				for(var i=2017;i<2027;i++){
+					$("#year1").append("<option value='"+i+"'>"+i+"</option>");
+					$("#year2").append("<option value='"+i+"'>"+i+"</option>");
+				}
+
+				for(var i=1;i<=12;i++){
+					$("#month1").append("<option value='"+i+"'>"+i+"</option>");
+					$("#month2").append("<option value='"+i+"'>"+i+"</option>");
+				}
+		
+				changeday1();
+				changeday2();
+				$("#year1 option[value='"+nowyear+"']").attr("selected",true);
+				$("#year2 option[value='"+nowyear+"']").attr("selected",true);
+				$("#month1 option[value='"+nowmonth+"']").attr("selected",true);
+				$("#month2 option[value='"+nowmonth+"']").attr("selected",true);
+				$("#day1 option[value='"+nowdate+"']").attr("selected",true);
+				$("#day2 option[value='"+nowdate+"']").attr("selected",true);
+				
+				$("#year1").change(changeday1);				
+				$("#month1").change(changeday1);
+				$("#year2").change(changeday2);
+				$("#month2").change(changeday2);
+
+			function changeday1(){
+				$("#day1").html("");
+				var bigday=getDaysInMonth($("#year1 option:selected").text(),$("#month1 option:selected").text());
+				for(var i=1;i<=bigday;i++){
+					$("#day1").append("<option value='"+i+"'>"+(i<10?"0":"")+i+"</option>");
+				}
+			}
+			function changeday2(){
+				$("#day2").html("");
+				var bigday=getDaysInMonth($("#year2 option:selected").text(),$("#month2 option:selected").text());
+				for(var i=1;i<=bigday;i++){
+					$("#day2").append("<option value='"+i+"'>"+(i<10?"0":"")+i+"</option>");
+				}
+			}
+			function getDaysInMonth(year,month){
+				var temp = new Date(year,month,0);
+				return temp.getDate();
+			}
+			function download(){
+				var dateString1=$("#year1 option:selected").text()+"-"+$("#month1 option:selected").text()+"-"+$("#day1 option:selected").text();
+				var dateString2=$("#year2 option:selected").text()+"-"+$("#month2 option:selected").text()+"-"+$("#day2 option:selected").text();
+				window.location.href="getloglist.action?dateString1="+dateString1+"&dateString2="+dateString2;
+			}
+			
+
+		</script>
+	</body>
+</html>

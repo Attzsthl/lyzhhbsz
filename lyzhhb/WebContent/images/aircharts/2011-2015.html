@@ -1,0 +1,273 @@
+<html>
+        <head>
+            <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+        <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+            <img src="../aircharts/4-2.PNG" alt="">
+            <div id="container" style="width: 500px;height:400px"></div>
+            <div id="container1" style="width: 500px;height:400px"></div>
+            <div id="container2" style="width: 500px;height:400px"></div>
+            <script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            zoomType: 'xy'
+        },
+        title: {
+            text: '2011-2015年溧阳市区环境空气主要污染物浓度-SO2'
+        },
+
+        xAxis: [{
+            categories: ['2011', '2012', '2013', '2014', '2015'],
+            crosshair: true
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value}%',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            title: {
+                text: '超标率',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            opposite: true 
+        }, { // Secondary yAxis
+            title: {
+                text: 'SO2浓度(μg/m³)',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value}',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            //opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            align: 'center',
+            //x: -100,
+            verticalAlign: 'bottom',
+            //y: 25,
+            floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        series: [{
+            name: '日均值变化范围',
+            type: 'columnrange',
+            yAxis: 1,
+            data: [[8,91],
+                [5,86],
+                [12,118],
+                [4, 112],
+                [4, 65]],
+            tooltip: {  
+                valueSuffix: ' μg/m³'
+            }
+        }, {
+            name: '超标率',
+            type: 'line',
+            data: [0,0,0,0,0],
+            tooltip: {
+                valueSuffix: '%'
+            }
+        }
+    ],
+   // colors: [ '#AAAAAA', '#FFBB00','#7700FF','#66FF66','#9999FF'],
+    credits:{
+                                enabled:false // 禁用版权信息
+                    },
+    });
+});
+
+
+$(function () {
+    $('#container1').highcharts({
+        chart: {
+            zoomType: 'xy'
+        },
+        title: {
+            text: '2011-2015年溧阳市区环境空气主要污染物浓度-NO2'
+        },
+
+        xAxis: [{
+            categories: ['2011', '2012', '2013', '2014', '2015'],
+            crosshair: true
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value}%',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            title: {
+                text: '超标率',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            opposite: true 
+        }, { // Secondary yAxis
+            title: {
+                text: 'NO2浓度(μg/m³)',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value}',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            //opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            align: 'center',
+            //x: -100,
+            verticalAlign: 'bottom',
+            //y: 25,
+            floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        series: [{
+            name: '日均值变化范围',
+            type: 'columnrange',
+            yAxis: 1,
+            data: [[20,93],
+                [10,90],
+                [20,111],
+                [10, 104],
+                [11, 102]],
+            tooltip: {  
+                valueSuffix: ' μg/m³'
+            }
+        }, {
+            name: '超标率',
+            type: 'line',
+            data: [1.5,1.5,4.5,0.7,2.0],
+            tooltip: {
+                valueSuffix: '%'
+            }
+        }
+    ],
+  //  colors: ['#FFBB00','#7700FF','#66FF66','#9999FF'],
+    credits:{
+                                enabled:false // 禁用版权信息
+                    },
+    });
+});
+
+
+$(function () {
+    $('#container2').highcharts({
+        chart: {
+            zoomType: 'xy'
+        },
+        title: {
+            text: '2011-2015年溧阳市区环境空气主要污染物浓度-PM10'
+        },
+
+        xAxis: [{
+            categories: ['2011', '2012', '2013', '2014', '2015'],
+            crosshair: true
+        }],
+        yAxis: [{ // Primary yAxis
+            labels: {
+                format: '{value}%',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            title: {
+                text: '超标率',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            opposite: true 
+        }, { // Secondary yAxis
+            title: {
+                text: 'PM10浓度(μg/m³)',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value}',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            //opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            align: 'center',
+            //x: -100,
+            verticalAlign: 'bottom',
+            //y: 25,
+            floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        series: [{
+            name: '日均值变化范围',
+            type: 'columnrange',
+            yAxis: 1,
+            data: [[51,233],
+                [25,317],
+                [20,380],
+                [19,402],
+                [17,294]],
+            tooltip: {  
+                valueSuffix: ' μg/m³'
+            }
+        }, {
+            name: '超标率',
+            type: 'line',
+            data: [4.1,5.9,17.8,13.8,10.5],
+            tooltip: {
+                valueSuffix: '%'
+            }
+        }
+    ],
+  //  colors: ['#FFBB00','#7700FF','#66FF66','#9999FF'],
+    credits:{
+                                enabled:false // 禁用版权信息
+                    },
+    });
+});
+
+
+            </script>
+        </body>
+    </html>

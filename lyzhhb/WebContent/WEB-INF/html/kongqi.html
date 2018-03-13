@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+   	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+ 	<meta http-equiv="expires" content="0"> 
+    <title>相关指标统计分析</title>
+    <link rel="shortcut icon" href="images/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/replay.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/jquery.min.js"></script>
+    
+    <script>
+        
+    </script>
+
+    <style>
+        body{
+            overflow: hidden;
+        }
+        iframe{
+            height: 600px;
+            width: 60%;
+            float: right;
+            margin-top: 40px;
+            margin-right: 100px;
+            border: none
+        }
+        .lead{
+            position: absolute;
+            top: 105px;
+            left: 20px;
+            border: solid 2px #BDC8B0;
+            border-radius: 5px;
+            padding: 0;
+        }
+        .lead li{
+            height: 35px;
+            background-color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 2px 2px;
+        }
+        .lead li:hover{
+            background-color: #C9D3C6;
+        }
+        .lead a{
+            height: 100%;
+            width: 100%;
+            line-height: 40px;
+            border-radius: 3px;
+            display: block;
+            padding:0 15px;
+            color: #000;
+        
+        }
+        .lead a:hover{
+            color: #000;
+        }
+        .lead a:visited{
+            color: #000;
+        }
+        .lead div{
+            height: 100%;
+            width: 100%;
+            line-height: 40px;
+        }
+        .fa{
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body style="background-color: white;">
+    <div class="head">
+        <div class="title">
+            <img style="margin-top: 28px;height: 40px;" src="images/tittt.png" draggable="false">
+        </div>
+    </div>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+
+    <ul class = "lead">
+        <li ><div data-num = "gk">概况<i class="fa fa-level-down" aria-hidden="true"></i> </div></li>
+        <li hidden><a class = "gk" data-nam='2015jb.html'>2015溧阳环境空气质量级别</a></li>
+        <li hidden><a class = "gk" data-nam='2015py.html'>2015年溧阳首要污染物出现频率</a></li>
+        <li hidden><a class = "gk" data-nam='fh.html'>环境空气质量各污染物负荷</a></li>
+        <li ><div data-num = "day">污染物日均变化率<i class="fa fa-level-down" aria-hidden="true"></i> </div></li>
+        <li hidden><a class = "day" data-nam='2015cy.html'>2015溧阳市区臭氧日最大8小时平均浓度统计图</a></li>
+        <li hidden><a class = "day" data-nam='20152on.html'>2015溧阳市区二氧化氮日均值频率统计图</a></li>
+        <li hidden><a class = "day" data-nam='2015kl.html'>2015溧阳市区可吸入颗粒物日均值频率统计图</a></li>
+        <li hidden><a class = "day" data-nam='2015xk.html'>2015溧阳市区细颗粒物日均值频率统计图</a></li>
+        <li hidden><a class = "day" data-nam='2015co.html'>2015溧阳市区一氧化碳日均值频率统计图</a></li>
+        <li hidden><a class = "day" data-nam='2015so2.html'>2015年溧阳市区二氧化硫日均值频率统计图</a></li>
+        <li ><div data-num = "yj">月季变化率<i class="fa fa-level-down" aria-hidden="true"></i> </div></li>
+        <li hidden><a class = "yj" data-nam='20152014.html'>2015年较2014年六项污染物月均值升降幅度</a></li>
+        <li hidden><a class = "yj" data-nam='2015mmm.html'>2015年溧阳市区主要大气污染物浓度月变化</a></li>
+        <li hidden><a class = "yj" data-nam='2015jjj.html'>2015年溧阳市环境空气污染物的季均值和超标率</a></li>
+        <li ><div data-num = "year">年变化率<i class="fa fa-level-down" aria-hidden="true"></i> </div></li>
+        <li hidden><a class = "year" data-nam='2006-2015.html'>2006-2015年溧阳市环境空气污染物年均值变化趋势图</a></li>
+        <li hidden><a class = "year" data-nam='2010-2015.html'>2010-2015年溧阳市综合污染指数和污染负荷系数变化趋势</a></li>
+        <li hidden><a class = "year" data-nam='2011-2015.html'>2011-2015年溧阳市区环境空气主要污染物浓度</a></li>
+    </ul>
+    <iframe src="images/aircharts/2015jb.html"></iframe>
+    <script>
+        $(".lead a").click(function(event) {
+            $("iframe").attr('src', "images/aircharts/"+$(this).data('nam'));
+        });
+    </script>
+    <script src="js/fenxi.js"></script>
+
+</body>
+</html>

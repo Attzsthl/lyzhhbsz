@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+   	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+ 	<meta http-equiv="expires" content="0">  
+    <title>溧阳智慧环保</title>
+    <script type="text/javascript" src="app/js/jquery-3.1.1.min.js"></script>
+    <link rel="shortcut icon" href="images/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/replay.css">
+	<link rel="stylesheet" type="text/css" href="css/buttonstyle.css">
+	<link rel="stylesheet" type="text/css" href="css/lete.css"/>
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+	 	<script type="text/javascript" src="app/js/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript" src="app/js/customjjs.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	
+	<link rel="stylesheet" href="http://112.33.15.169:8181/arcgis_js_api/library/3.21/3.21/esri/themes/calcite/dijit/calcite.css ">
+    <link rel="stylesheet" href="http://112.33.15.169:8181/arcgis_js_api/library/3.21/3.21/esri/css/esri.css" />
+    <script type="text/javascript" src="http://112.33.15.169:8181/arcgis_js_api/library/3.21/3.21/init.js"></script>
+
+    <!--<link rel="stylesheet" href="http://www.jacksung.cn:8080/arcgis_js_api/library/3.21/3.21/esri/css/esri.css" />
+	<script type="text/javascript" src="http://www.jacksung.cn:8080/arcgis_js_api/library/3.21/3.21/init.js"></script>-->
+
+	
+    
+    <script type="text/javascript" src="js/fenxi.js"></script>
+    <script type="text/javascript" src="json/sxt.js"></script>
+    <script type="text/javascript" src="js/eachfunction.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="js/draw.js"></script>
+    <script type="text/javascript" src="js/javascript.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+    <script src="js/turn.min.js"></script>
+    <script type="text/javascript" src="js/showhide.js"></script>
+	<script type="text/javascript">
+	function editPassword()
+	{
+			if($("#newpassword").val()!=$("#newpassword2").val())
+	  		{
+	  			alert("两次密码不同！");
+	  		}
+	  		else
+	  			{
+	  			$.post("changepassword.action",{password:$("#newpassword").val()},function(data,textStatus){
+	  				if(data=="操作成功")
+	  					CloseDiv('EditPassword','fade');
+	  				else
+	  					alert(data);		
+	  		 		},"text");
+	  			}
+	}
+	
+	
+	</script>
+
+
+</head>
+
+<body class="calcite">
+
+	
+	
+            <div class="login">
+            	<div id="username"><a href="javascript:toggle()">欢迎您，用户名</a></div>
+            	<span id="logindiv">
+     		        <a href="login.action">退出系统</a>
+	            
+		            <a href="javascript:ShowDiv('EditPassword','fade')">修改密码</a>
+		            
+					
+					
+					<a href="javascript:problemscallback()" target="_blank">信息反馈</a>
+					
+					<a href="javascript:cejuidv()" target="_blank">测距</a>
+		            <!--<a href="javascript:ShowDiv('MyDiv','fade')">技术支持</a>-->
+            	</span>
+
+	            
+	            
+            </div>
+        <script>
+        function toggle(){
+        	$("#logindiv").toggle(500);
+        }
+        
+		function gettestpermissionjson() {
+		    var jsonStr = "{"; // json格式开始
+		    jsonStr+="\"permission\":\""+"super"+
+		    		 "\",\"timecheck\":\""+new Date().getTime()+
+		    		 "\"}"; 
+		    var jsonObj = jQuery.parseJSON(jsonStr);
+		    return jsonObj;
+		}
+        $.post("testpermission.action",gettestpermissionjson(),function(result){
+        	if(result=="null"){
+        		self.location='login.action'; 
+        	}else if(result=="true"){
+        		$("#logindiv").append('<a href="houtai.action" target="_blank">后台管理</a>');
+        	}
+        },"text");
+        
+        
+    </script>
+    <div class="head">    
+        <div class="too-short">请增加宽度以获得最完美的使用体验</div>
+        <div class="title">
+            <img style="margin-top: 28px;height: 40px;" src="images/tittt.png" draggable="false">
+        </div>
+        <div class="nav-0">
+            <div class="nav-hold">
+                <a class="nav" href="#" data-num="1" >基础信息
+					<ul>
+						<li class="nav-2" id="xzxq" onclick="changepage('xzxq') " >乡镇辖区</li>
+                        <li class="nav-2" onclick="changepage('xzc')">行政村</li>
+                        <li class="nav-2" onclick="changepage('gyyq')">工业园区</li>
+                        <li class="nav-2" onclick="changepage('thlyhfqy')">太湖二级保护区</li>
+                        <li class="nav-2" onclick="changepage('sthx')">生态红线</li>
+                        <li class="nav-2" onclick="changepage('xqyzqh')">畜禽养殖区划</li>
+						<li class="nav-2" onclick="changepage('sxt')">水系图</li>
+						<!--<li class="nav-2" onclick="notable('tdly')">土地利用</li>-->
+						
+					</ul></a>
+            </div>
+            <div class="nav-hold">
+                <a class="nav" href="#" data-num="2">水环境
+					<ul>
+                        <li class="nav-2" onclick="changepage('sstkhdm')">水十条考核断面</li>
+                        <li class="nav-2" onclick="changepage('qybcdm')">区域补偿断面</li>
+                        <li class="nav-2" onclick="changepage('jcdm')">例行监测断面</li>
+                        <li class="nav-2" onclick="changepage('zqsgnkhdm')">镇区考核断面</li>
+                        
+                        <li class="nav-2 test">自动站</li>
+						<li class="nav-2 show-3">相关指标统计<i class="fa fa-chevron-right" aria-hidden="true"></i><ul class="nav-3">
+							<!--onclick="window.open('dibiaoshui.action')"-->
+							<li onclick="turnbc()">区域补偿断面</li>
+							<li>水十条断面</li>
+							
+						</ul></li>
+					</ul></a>
+            </div>
+            <div class="nav-hold">
+                <a class="nav" href="#" data-num="3">大气环境
+					<ul>                      
+                        <li class="nav-2" onclick="changepage('jcz')">空气监测点</li>
+                        <li class="nav-2" onclick="changepage('jrq')">禁燃区</li>
+                        <li class="nav-2" onclick="kongqi()">相关指标统计分析</li>
+                        
+					</ul></a>
+            </div>
+
+            <!--<div class="nav-hold">
+                <a class="nav" href="#" data-num="5">土壤环境
+					<ul>
+                        <li class="nav-2 test">土壤监测点</li>
+					</ul></a>
+            </div>-->
+			
+            <div class="nav-hold">
+                <a class="nav" href="#" data-num="6">生态管理
+					<ul>
+						
+						<li class="nav-2" onclick="changepage('sthx')">生态红线</li>
+						
+						
+						<li class="nav-2 show-3">生态建设<i class="fa fa-chevron-right" aria-hidden="true"></i><ul class="nav-3">
+							
+							<!--<li class="test">生态镇</li>-->
+							<li onclick="changepage('stc')">生态村</li>
+							<!--<li class="test">绿色社区</li>-->
+                            <li onclick="changepage('lsxx')">绿色学校</li>
+                            <!--<li class="test">生态工程</li>-->
+							
+						</ul></li>
+						
+						<li class="nav-2 show-3">畜禽养殖<i class="fa fa-chevron-right" aria-hidden="true"></i><ul class="nav-3">
+                            <li onclick="changepage('xqyzqh')">畜禽养殖区划</li>
+							<li onclick="changepage('yzc')">养殖场</li>
+							
+						</ul></li>
+						
+						<li class="nav-2 show-3">农村环境<i class="fa fa-chevron-right" aria-hidden="true"></i><ul class="nav-3">
+							<li class="test">创建称号</li>
+							<li onclick="changepage('sdc')">综合整治试点村</li>
+						</ul></li>
+						
+					</ul></a>
+            </div>
+            
+            <div class="nav-hold">
+                <a class="nav" href="#" data-num="4">重点工业企业
+					<ul>
+						
+						<li class="nav-2 show-3">涉水<i class="fa fa-chevron-right" aria-hidden="true"></i><ul class="nav-3">							
+							<li onclick="changepage('wsc')">污水处理厂</li>
+							<li onclick="changepage('zdqy')">重点企业</li>
+						</ul></li>                        
+                        <li class="nav-2 test">涉气</li>
+                        
+                        <!-- <li class="nav-2 test" style="line-height:22px">城市噪声自动监测点</li> -->
+					</ul></a>
+            </div>
+
+            <div class="nav-hold">
+                <a class="nav" href="#" data-num="7">环境风险源
+					<ul>
+                        <li class="nav-2" onclick="changepage('hjfxqy')">环境风险区域</li>
+						<li class="nav-2" onclick="changepage('zdhjfxyfb')">重点环境风险源</li>
+					</ul></a>
+            </div>
+            <div class="nav-hold">
+                <a class="nav" href="#" data-num="8">亮点工程
+					</a>
+            </div>
+            <div class="nav-hold">
+                <a class="nav" data-num="9">专题研究
+				<ul>
+						<li class="nav-2" onclick="window.open('article.action')">沙河水库硅藻</li>
+						<li class="nav-2" onclick="window.open('article2.action')">生态系统多样性</li>
+					</ul></a>
+            </div>
+            
+            <!--<div class="nav-hold">
+                <a class="nav" href="#" data-num="5">263专项行动
+					<ul>
+						<li class="nav-2" onclick="changepage('els')">重点工程项目</li>
+					</ul></a>
+            </div>-->
+            <!--<div class="nav-hold">
+                <a class="nav" href="#" data-num="6" onclick="changepage('zljp')">总量减排</a>
+            </div>-->
+            <!-- <div class="nav-hold">
+                <a class="nav" href="#" data-num="7">环境整治
+					<ul>
+						<li class="nav-2" onclick="changepage('zljp')">总量减排</i>
+						<li class="nav-2" onclick="changepage('gyfqzz')">工业废气整治</i>
+					</ul></a>
+            </div> -->
+            
+
+        </div>
+    </div>
+    <div class="map" id="map">
+    	
+	    <div class="kaiguan">
+		    <div id="kaiguan1" class="open1" onclick="kaiguan()">
+		    	<div id="kaiguan2" class="open2">
+		    		
+		    	</div>
+		    </div>
+	    </div>
+    	<!--<img id="moveimg" src="app/img/jacksunglogo2.png" style="height: 50px;width: 50px;position: absolute;z-index: 999;" hidden="hidden"/>-->
+    	<div id="moveimg" hidden="hidden" style="position: absolute;z-index: 999;">
+    		点击地图获取需要反馈信息的点
+    	</div>
+    	<div id="mainriverdiv" style="position:absolute; top:30px; right:330px; z-index:999;" hidden="hidden">
+    		主要河流：
+    		<select id="mainriver" onchange="changemainriver()">
+    		</select>
+    	</div>
+    
+    	<span class="ceju" hidden="hidden" onclick="closecejuidv()" style="position:absolute; top:190px; left:260px; width: 25px; z-index:999;">X</span>
+
+
+
+		<div id="pad" class="ceju" hidden="hidden">		
+			<div id="measurementDiv"></div>
+		</div>
+        <!--<input type="button" onclick="showhide()" id ="show">-->
+        <div style="position:absolute; top:10px; right:320px; z-index:999;" id="div1">
+         	<div style="background-color: #F2F2F2">
+         		<div style="margin-top: 5px;float: left;">
+ 			  		<span style="font-weight: bold;font-size: 12px; margin-right: 5px;">经度:</span><input style="width: 80px;" id="jingdu" type="text" placeholder="WGS84坐标"/><br>
+        			<span style="font-weight: bold;font-size: 12px;margin-right: 5px;">纬度:</span><input style="width: 80px;" id="weidu" type="text" placeholder="WGS84坐标"/><br>
+
+     			</div>
+   	         	<div style="margin-left: 5px;margin-top:10px;float: right;">
+					<button id="dingwei" class="button blue" onclick="putposition()" style="float: left;">定位</button>
+	        		<button id="jwdjc" class="button blue" hidden="hidden" onclick="outcheck()" style="float: right;margin-left: 5px;">检测</button>
+         		</div>
+         	</div>
+
+
+    	</div>
+    	
+    	<div style="position:absolute; top:10px; left: 150px; z-index:999;" id="div1">
+         	<div style="background-color: #F2F2F2">
+         		<div style="margin-top: 5px;float: left;">
+ 			  		<span  style="font-weight: bold;font-size: 12px; margin-right: 5px;">当前位置:</span>
+ 			  		<span id="zhiying"></span>
+ 			  			<br>
+     			</div>
+   	         	
+         	</div>
+
+
+    	</div>
+
+
+    </div>
+    <div class="changebasemap">
+        <div class="img"></div>
+    </div>
+
+    <div id="maploading" style="width: 100%;height:100%;position: absolute;left:0px;top: 0px;background-color: white;opacity: 1;z-index:9999;opacity: 0.5;">
+        <div style="left: 40%;top:45%;position: absolute;">
+            <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+        </div>
+    </div>
+    <div class="stuff">
+        <button onclick="setExtent()" class="show-all"><i class="fa fa-globe fa-2x" aria-hidden="true"></i></button>
+        <input type="range" id="range" min="1" max="100" value="75" onchange="change()" />
+        <div class="close-info"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></div>
+        <div class="info">
+            <div class="info-up" data-num="1">
+                <h2>基础信息</h2>
+                <p>溧阳隶属于江苏常州市，地处长江三角洲南部的苏、浙、皖三省交界处。是宁杭生态经济带上的重要副中心城市和示范区。位于北纬31°09'-31°41'，东经119°08'-119°36'，东邻宜兴，西与高淳、溧水毗邻，南与安徽省的广德、郎溪接壤，北接句容、金坛，南北长59.06千米，东西宽45.14千米，土地总面积1535.87平方千米。<br>溧阳属亚热带季风气候，干湿冷暖，四季分明，雨量充沛，无霜期长，全年平均温度17.5℃，其中：一月份3.2℃，七月份31.1℃。年均降水量1149.7毫米。其中，一月份42.2毫米，七月154.1毫米。大约日照时间，一月份137.6小时，七月份229小时。<br>溧阳有耕地面积112万亩，林地32.8万亩，河流和湖泊42.6万亩。物产丰富，是著名的“鱼米之乡”、“丝绸之乡”、“茶叶之乡”，经济连续多年名列全国百强县（市）。溧阳文化属吴越文化，溧阳人属江浙民系使用吴语。盛产稻、麦、油、茶、蚕茧、螃蟹、板栗、西瓜、毛竹等。</p>
+            </div>
+            <div class="info-up hide" data-num="2">
+                <h2>环境质量</h2>
+                <p>随着环境意识日益增强，人们对环境信息的知情诉求愈加迫切。环境质量版块以地表水、大气、噪声监测数据和环境功能区划为支撑，通过整合我市环境质量在线监测系统，动态提供全市饮用水源水质旬报，大气空气质量日报、实时报，噪声网格监测及功能区监测情况，以数据、图表形式，让市民随时掌握身边环境质量状况。</p>
+            </div>
+            <div class="info-up hide" data-num="3">
+                <h2>环境管理</h2>
+                <p>生态文明建设离不开细胞工程的发光发亮，从辖市区到工业园区、乡镇（街道）、行政村、社区和学校，我市生态文明创建工作层层播种，处处开花，成绩斐然。该版块将历年来各生态建设单位丰硕成果展示在地图上，其中包括了3个国家级生态市（区），6个省级以上生态工业园，19个省级以上生态镇，117个省级以上生态村，39个省级以上绿色社区、138所省级以上绿色学校。为了便于各个生态建设单位动态展示创建工作阶段成果，各建设单位可定期更新单位展示信息。</p>
+            </div>
+            <div class="info-up hide" data-num="4">
+                <h2>环境风险源</h2>
+                <p>根据企业生产状况、产排污情况、污染物危险程度、周围环境状况及环境保护目标要求，本预案可能存在的环境危险源及危险因素进行分析，环境风险识别主要为物质危险识别、生产设施风险识别。</p>
+            </div>
+            <div class="info-up hide" data-num="5">
+                <h2>263专项行动</h2>
+                <p>263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动263专项行动</p>
+            </div>
+            <div class="info-up hide" data-num="6">
+                <h2>总量减排</h2>
+                <p>“十一五”期间，在市委市政府的高度重视下，经过各辖市、区政府及相关部门的共同努力，我市化学需氧量累计削减率为32.3%（目标任务为20.2%），二氧化硫累计削减率为29.6%（目标任务为13.7%），超额完成“十一五”减排任务，常州市政府被省政府评为“十一五”减排先进集体，并在全省环保大会上予以表彰。 为完成“十二五”减排任务,我市大力推进工程减排、结构减排和管理减排，取得较好效果。到2013年6月，我市共完成水污染减排项目445个，其中污水处理厂及工业治理项目120个，结构调整项目196个，养殖污染治理项目129个。完成大气污染减排项目144个，其中工程治理项目75个，结构调整项目69个。
+                    经环保部核查认定，到2013年上半年，我市已在2010年基础上削减化学需氧量23.8%，氨氮11.26%，二氧化硫22.7%，氮氧化物10.1%。对照省政府下达的任务，四项主要污染物均已实现时间过半任务过半的目标，其中化学需氧量、二氧化硫已动态完成“十二五”减排任务。
+                </p>
+            </div>
+            <div class="info-up hide" data-num="7">
+                <h2>环境整治</h2>
+                <p>为将我市建设成为“生态宜居城、和谐幸福城”，近年来，全市相关部门上下团结一心，全力推进各项环境整治工程的开展和实施。该版块将职能部门的工作从枯燥的文字表述，转化为生动的地图表达，以清水工程、净化空气、太湖治水三大专题展示几年来各职能部门在改善全市环境状况方面所做的不懈努力。该板块不仅保障了市民的知情权，还为其行使监督权提供了条件，有利于市民与政府之间通过相互沟通、相互了解和理解，缓解由于信息不畅而带来的社会矛盾。</p>
+            </div>
+            <div class="info-up hide" data-num="8">
+                <h2>专题研究</h2>
+                <p>环境问题的专题研究报告</p>
+            </div>
+            <!-- <div class="info-down">
+				<h2>系统公告</h2>
+				<p>县市级智慧环保地理信息平台-以江苏省溧阳市为例V_0.0.118版本现已发布</p>
+			</div> -->
+        </div>
+       <!-- <div class="charts" id="charts" style="display:none;z-index:9999">
+            <div class="clo-chart">X</div>
+            <div class="clo-charts"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></div>
+            <div class="close-charts">
+                <div class="close-chart charted" data-num="1">高锰酸盐</div>
+                <div class="close-chart" data-num="2">氨氮</div>
+                <div class="close-chart" data-num="3">总磷</div>
+            </div>
+
+            <div id="gmsycontainer" class="chart" data-num="1" style="width:100%;height:350px"></div>
+            <div id="adcontainer" class="chart hide" data-num="2" style="width:100%;height:350px"></div>
+            <div id="zlcontainer" class="chart hide" data-num="3" style="width:100%;height:350px"></div>
+        </div>-->
+        <!--乡镇断面-->
+        <div id="xzdmcharts" class="charts" style="z-index:9999;background:#809C9F" hidden="hidden">
+                <div class="clo-chart">X</div>
+            <div class="clo-charts"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></div>
+            <!--<p>镇区</p>
+            <select id="xzzhenqu">
+				<option value="溧城镇">溧城镇</option>
+				<option value="南渡镇">南渡镇</option>
+				<option value="上兴镇">上兴镇</option>
+				<option value="别桥镇">别桥镇</option>
+				<option value="埭头镇">埭头镇</option>
+				<option value="竹箦镇">竹箦镇</option>
+				<option value="上黄镇">上黄镇</option>
+				<option value="戴埠镇">戴埠镇</option>
+				<option value="天目湖镇">天目湖镇</option>
+				<option value="社渚镇">社渚镇</option>
+				<option value="昆仑街道">昆仑街道</option>
+			</select>-->
+			
+		   <p>监测年份</p>
+            <select id="xzyear">
+            	<option value="all">全部</option>
+				<option value="2016">2016</option>
+				<option value="2017">2017</option>			
+			</select>
+			
+            <p>监测类别</p>
+            <select id="xztype">
+				<option value="ad">氨氮</option>
+				<option value="zl">总磷</option>
+				<option value="gmsy">高锰酸盐指数</option>
+				<option value="rjy">溶解氧</option>			
+			</select>
+			
+			
+            <label id="xzdm">站名</label>
+            <div id="xzdmzb" style="height:300px;width:500px;"></div>
+        </div>
+        
+        <div id="jczcharts" class="charts" style="z-index:9999;background: #796296" hidden="hidden">
+                <div class="clo-chart">X</div>
+            <div class="clo-charts"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></div>
+            <p id="jczname">空气监测指标</p>
+            <p>空气监测指标</p>
+            <select id="airtype">
+				<option value="AQI">AQI</option>
+				<option value="co">CO</option>
+				<option value="no2">NO2</option>
+				<option value="o3">O3</option>
+				<option value="pm10">PM 10</option>
+				<option value="pm2_5">PM 2.5</option>
+				<option value="so2">SO2</option>
+			</select>
+            <!--<div class="export"><button>导出Excel</button><button>导出报表</button></div>-->
+            <div id="aqi24" style="width:500px;height:300px;"></div>
+        </div>
+        <div id="qybcdmcharts" class="charts" style="z-index:9999;background:#809C9F" hidden="hidden">
+                <div class="clo-chart">X</div>
+            <div class="clo-charts"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></div>
+            <p>监测年份</p>
+            <select id="qyyear">
+				<!-- <option value="0" hidden>年份</option> -->
+				<option value="1">2011</option>
+				<option value="2">2012</option>
+				<option value="2">2013</option>
+				<option value="2">2014</option>
+				<option value="2">2015</option>
+			</select>
+            <p>监测类别</p>
+            <select id="qytype">
+				<!-- <option value="0" hidden>相关指标</option> -->
+				<option value="1">高锰酸盐</option>
+				<option value="2">氨氮</option>
+				<option value="2">总磷</option>
+			</select>
+            <label id="dmmc">站名</label>
+            <!--<div class="export"><button>导出Excel</button><button>导出报表</button></div>-->
+            <div id="qybcdmzb" style="height:300px;width:500px;"></div>
+        </div>
+        <div id="jcdmcharts" class="charts" style="z-index:9999;background:#809C9F" hidden="hidden">
+                <div class="clo-chart">X</div>
+            <div class="clo-charts"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></div>
+            <p>监测年份</p>
+            <select id="nianfen">
+				<option value="all">全部</option>
+				<option value="1">2010</option>
+				<option value="1">2011</option>
+				<option value="2">2012</option>
+				<option value="2">2013</option>
+				<option value="2">2014</option>
+				<option value="2">2015</option>
+			</select>
+            <p>监测类别</p>
+            <select id="type">
+				<!-- <option value="0" hidden>相关指标</option> -->
+				<option value="1">水温</option>
+				<option value="2">水深</option>
+				<option value="2">流量</option>
+				<option value="2">pH</option>
+				<option value="2">电导率</option>
+				<option value="2">溶解氧</option>
+				<option value="2">高锰酸盐指数</option>
+				<option value="2">生化需氧量</option>
+				<option value="2">氨氮</option>
+				<option value="2">石油类</option>
+				<option value="2">挥发酚</option>
+				<option value="2">铅</option>
+				<option value="2">化学需氧量</option>
+				<option value="2">总氮</option>
+				<option value="">总磷</option>
+				<option value="">氟化物</option>
+				<option value="">硒</option>
+				<option value="">砷</option>
+				<option value="">镉</option>
+				<option value="">六价铬</option>
+				<option value="">总氰化物</option>
+				<option value="">硫化物</option>
+				<option value="">硫酸盐</option>
+				<option value="">氯化物</option>
+				<option value="">硝酸盐</option>
+				<option value="">悬浮物</option>
+				<option value="">总硬度</option>
+				<option value="">亚硝酸盐</option>
+				<option value="">非离子氨</option>
+			</select>
+            <label id="jcdmdmmc">站名</label>
+            <!--<div class="export"><button>导出Excel</button><button>导出报表</button></div>-->
+            <div id="jcdmzb" style="height:300px;width:500px;"></div>
+        </div>
+        <div class="stuff-show">
+            <div class="stuff-hide"></div>
+            <div class="tuli">
+            	<img src="images/tuli/zljp.png" data-tuli="zljp" draggable=false></img>
+                <img src="images/tuli/zhen.png" data-tuli="xzxq" draggable=false></img>
+                <img src="images/tuli/rjcj.png" data-tuli="qybcdm" style="top: -20px" draggable=false></img>
+                <img src="images/tuli/zswlt.PNG" data-tuli="zswlt" draggable=false></img>
+                <img src="images/tuli/thly.png" data-tuli="thlyhfqy" style="left: -60px;top: 0px;" draggable=false></img>
+                <img src="images/tuli/gyyq.png" data-tuli="gyyq" draggable=false></img>
+                <img src="images/tuli/sxt.PNG" data-tuli="sxt" style="left: -20px;top: -100px;" draggable=false></img>
+                <img src="images/tuli/gyfq.png" data-tuli="gyfqzz" style="left: -20px" draggable=false></img>
+                <img src="images/tuli/pwk.png" data-tuli="pwk" draggable=false></img>
+                <img src="images/tuli/wsc.png" data-tuli="wsc" style="left: 20px" draggable=false></img>
+                <img src="images/tuli/sthx.png" data-tuli="sthx" style="top: 0px;left: 0px" draggable=false></img>
+                <img src="images/tuli/xqyzqh.png" data-tuli="xqyzqh" style="left:-10px;top: -120px;" draggable=false></img>
+                <img src="images/tuli/jcdm.png" data-tuli="jcdm" style="left: 20px;top: -50px;width: 65px" draggable=false></img>
+                <img src="images/tuli/kqjc.png" data-tuli="jcz" style="left: -60px" draggable=false></img>
+                <img src="images/tuli/cun.png" data-tuli="xzc" style="left: 0px;top: -20px;" draggable=false></img>
+                <img src="images/tuli/nchj.png" data-tuli="sdc" draggable=false></img>
+                <img src="images/tuli/zdhjfxyfb.png" data-tuli="zdhjfxyfb" draggable=false></img>
+                <img src="images/tuli/yzc.png" data-tuli="yzc" style="left: 0px;top: -190px;width: 80px" draggable=false></img>
+                <img src="images/tuli/hjfxqy.png" data-tuli="hjfxqy" style="left: -20px;top: 0px;width: 120px" draggable=false></img>
+                <img src="images/tuli/sst.png" data-tuli="sstkhdm" style="left: -20px;top: -40px;width: 120px" draggable=false></img>
+            </div>
+            <div class="cont"></div>
+            <div id="loading" style="left: 40%;top:45%" class="cont">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+            <div id="usedcont" class="cont " style="overflow: hidden">
+
+
+
+                <article id="showinfodiv" class="selecti">
+                    <div>
+                        <!--************************************-->
+                        <div class="sel-left fl" style='width:309px;'>
+
+                            <div id="selectlayer">
+                                &nbsp;&nbsp;类型
+                                <select id="selectbody" onchange="selectchange()" style="font-family: 'YouYuan';font-weight:580;">
+
+								</select>
+                                
+                            </div>
+
+                            <!--**************搜索框*****************-->
+                            <div>
+                                <!--************农村环境搜索框********************-->
+                                <div id="searchsdc" hidden="hidden">
+                                    <div class="show-range">
+                                        <input type="range" id="range-1" min="0" max="100" value="0" oninput="showChange()" />
+                                        <button id="start">自动播放</button>
+                                        <div class="thisy" style="margin-left: 110px;">当前年份：</div>
+                                        <div class="thisy" id="playyear">
+                                            2013
+                                        </div>
+                                    </div>
+                                    <span class="" id="sizing-addon2">年度</span>
+									    <select id="sdcyear">
+                                    		<option>全部</option>
+                                    		<option>2013</option><option>2014</option>
+											<option>2015</option><option>2016</option><option>2017</option></select></br>
+                                    <span class="" id="sizing-addon2">乡镇</span>
+                                    	<select id="sdczm">
+                                    		<option>全部</option>
+                                    		<option>溧城镇</option>
+                                    		<option>南渡镇</option>
+                                    		<option>上兴镇</option>
+                                    		<option>别桥镇</option>
+                                    		<option>埭头镇</option>
+                                    		<option>竹箦镇</option>
+                                    		<option>上黄镇</option>
+                                    		<option>戴埠镇</option>
+                                    		<option>天目湖镇</option>
+                                    		<option>社渚镇</option>
+                                    		<option>昆仑街道</option>
+                                    	</select></br>
+                                    <span class="" id="sizing-addon2">设施工艺</span>
+                                    	<select id="sdcssgy">                                    		
+                                    		<option>全部</option>
+                                    		<option>“A/O法+次滤”生活污水处理系统</option>
+                                    		<option>A2O+人工湿地</option>
+                                    		<option>A2O活性污泥法</option>
+                                    		<option>AO+人工生态绿地工艺</option>
+                                    		<option>AO+生态绿地</option>
+                                    		<option>AO+生态绿地工艺</option>
+                                    		<option>高负荷地下渗滤池</option>
+                                    		<option>海沃特工艺</option>
+                                    		<option>接触氧化+人工湿地处理系统</option>
+                                    		<option>接触氧化工艺</option>
+                                    		<option>气升回流一体化工艺</option>
+                                    		<option>缺氧+好氧工艺</option>
+                                    		<option>缺氧好氧+人工湿地</option>
+                                    		<option>生物接触氧化工艺</option>
+                                    		<option>调节池+渗滤田+人工湿地</option>
+                                    		<option>厌氧+高负荷地下渗滤池</option>
+                                    		<option>厌氧+高负荷土地渗透系统</option>
+                                    		<option>厌氧+好氧</option>
+                                    		<option>厌氧+缺氧+好氧工艺</option>
+                                    		<option>厌氧池+高负荷渗滤池</option>
+                                    		<option>厌氧缺氧好氧+沉淀池</option>
+                                    		<option>厌氧缺氧好氧+生态绿地</option>
+                                    		<option>有动力好氧活性污泥处理系统</option>
+                                    	</select></br>
+									<span class="" id="sizing-addon2">规模</span>
+										<input id="searchsdcguimo1" style="width: 47px;float: left;margin-right: 5px;margin-left: 17px;" type="text" class="tiaojian" placeholder="0" aria-describedby="sizing-addon2">
+ 			  							<input id="searchsdcguimo2" style="width: 48px;float: right;" type="text" class="tiaojian" placeholder="50" aria-describedby="sizing-addon2"></br>
+                                    <span class="" id="sizing-addon2">行政村</span><input id="searchsdczqname" type="text" class="tiaojian" placeholder="溧城镇" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <!--**************畜禽养殖搜索框*******************-->
+                                <div id="searchxqyzqh" hidden="hidden">
+
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchxqyzqhName" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <!--**************还没做*******************-->
+                                <div id="searchxzxq" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchxzxqname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchxzc" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchxzcname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchgyyq" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchgyyqname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchthlyhfqy" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchthlyhfqyname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchsxt" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchsxtname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchwsc" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchwscname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchsthx" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchsthxname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+
+                                <div id="searchjcdm" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchjcdmname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchpwk" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchpwkname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchzdhjfxyfb" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchzdhjfxyfbname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchgyfqzz" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchgyfqzzname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchqybcdm" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchqybcdmname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchjcz" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchjczname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchhjfxqy" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchhjfxqyname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchyzc" hidden="hidden">
+
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchyzcname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                    <!--<button onclick="diejiafenxi()">超范围检测</button>-->
+                                </div>
+                                <div id="searchzljp" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchzljpname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchels" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchelsname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                
+                                <div id="searchzqsgnkhdm" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchzqsgnkhdmname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchsstkhdm" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchsstkhdmname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchjrq" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchjrqname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchlsxx" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchlsxxname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <div id="searchstc" hidden="hidden">
+                                    <span class="" id="sizing-addon2">名称</span><input id="searchstcname" type="text" class="tiaojian" placeholder="名称" aria-describedby="sizing-addon2"></br>
+                                </div>
+                                <!--**************还没做*******************-->
+                            </div>
+                            <!--*********搜索按钮******************-->
+                            <div class="sear">
+                                <button id="search" onclick="searchfunction(false)" type="button" style="margin-right: 10px;">查询</button>
+                                <!-- <button id="searchAll" onclick="chongzhi()" type="button" >重置</button> -->
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        <div class="sel-right fl">
+                            <div class="yema yemaa" style="float: left">
+                                共
+                                <p id="totalrow" style="display:inline"></p>
+                                条记录
+                            </div>
+                            <div style="float: left;position: relative;">
+                                <table id="table" class="tables">
+                                    <thead>
+                                        <tr>
+
+                                            <th>名称</th>
+
+                                        </tr>
+                                        <thead>
+                                            <tbody id="content" onclick="tdxs()">
+                                            </tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <div class="yema yemaa fr">
+                                    <p id="currentpage" style="display:inline"></p>/
+                                    <p id="totalpage" style="display:inline"></p>
+                                </div>
+                                <div class="yema fr">
+                                    <button onclick="lastpage()">
+								上一页
+								</button>
+                                    <button onclick="nextpage()">
+								下一页
+								</button>
+                                </div>
+                            </div>
+                        </div>
+                </article>
+                </button>
+                </div>
+            </div>
+            <div id="introduction" class="out biaoqin" hidden="hidden"><i class="fa fa-times fa-2x" aria-hidden="true"></i>
+                <div class="jcxx">
+                    <div id="pic">
+
+                    </div>
+                    <ul id="info">
+
+                    </ul>
+                </div>
+
+
+            </div>
+            <div class="out biaoqin" id="fibyzc" hidden="hidden"><i class="fa fa-times fa-2x" aria-hidden="true"></i> 处于禁养区的养殖场
+                <table class="tables">
+
+                    <thead>
+                        <tr>
+
+                            <th>养殖场名</th>
+                            <th>负责人</th>
+                            <th>联系电话</th>
+                            <th>所在禁养区</th>
+                        </tr>
+                        <thead>
+                            <tbody id="yzccontent">
+
+                            </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="popup" class="popup" style="position:absolute;display:none;z-index:998">
+            <i id="proploading" class="fa fa-spinner fa-pulse fa-5x fa-fw loading" style="z-index: 1000;display: none;"></i>
+
+
+            <table class="tables">
+                <thead>
+                    <tr id="popHead"></tr>
+                </thead>
+                <tbody id="popData">
+                </tbody>
+            </table>
+            <div id="popupdiv">
+
+            </div>
+        </div>
+
+
+
+
+			<div id="fade" class="black_overlay">  
+			</div>  
+ 	
+
+		 	
+		 	
+		 	<div id="MyDiv" class="white-content">  
+			  <div style="margin-left: 20px;margin-right: 20px;margin-top: 20px;line-height: 15px;">
+			  	        <h4 align="center">
+			               技术支持
+			            </h4>
+			            <p style="    line-height: 20px;
+                        margin-top: 10px;">
+			            	邮箱：821278796@qq.com
+			            	<br>
+			            	QQ：821278796
+			            	<br>
+			            	开发者网站：<br>
+			            	<a href="http://www.jacksung.cn" target="_blank">http://www.jacksung.cn</a>
+			            </p>				        
+				         <div style="float:right;"> 
+				            <button type="button" class="butttt" onclick="CloseDiv('MyDiv','fade')">
+				            	关闭
+				            </button>
+			 			</div>  
+		 			</div>
+		     </div> 
+		     
+		     <div id="EditPassword" class="white-content">  
+			  <div style="/*margin-left: 20px;margin-right: 20px;margin-top: 20px;line-height: 15px;*/">
+              <div style="margin:5px;">
+                    <h4 style="font-size: 16px;text-align: center; height: 30px;">修改密码</h4>
+                    </div>
+                    <div style="height: 30px;width: 460px;float: left; margin-bottom: 20px;">
+                      <div style="float: left;width: 60px; height: 25px;margin-top: 15px;margin-left: 80px;">新密码:</div>
+                      <input id="newpassword" type="password" placeholder="Password"  style="width: 200px;height: 30px;margin-right: 90px;">
+                    </div>
+                    <div style="height: 30px;width: 460px;float: left;margin-bottom: 15px;">
+                     <div style="float: left;width: 60px; height: 25px;margin-left: 80px;margin-top: 10px;">确认密码:</div>
+                    <input id="newpassword2" type="password" placeholder="Password" style="width: 200px;height: 30px;margin-right: 90px;">
+                    </div>
+                    <div style="float: right;margin-top:2px; margin-bottom:2px; height:30px; ">
+                    <button type="button" class="butttt" onclick="editPassword()" style="margin-right: 10px;">提交</button>    
+                    <button type="button" class="butttt" onclick="CloseDiv('EditPassword','fade')" style="margin-right: 20px;">关闭</button>
+                    </div>  
+                    </div> 	        
+		     </div>
+
+		     <div id="Callbackproblems" class="white-content" style="padding: 15px;">  
+			  <div>
+                    <div style="margin:2px;">
+                    <h4 style="font-size: 16px;text-align: center;">信息反馈</h4>
+                    </div>
+					<div style="/*margin-top: 10px;*/height: 70px;width: 460px;float: left;">
+					  <div style="float: left;width: 60px; height: 30px;margin-top: 20px;margin-left: 10px;">信息描述:</div>
+					  <textarea id="disc" style="width: 300px;
+                      height: 25px;
+                      position: relative;
+                      top: 15px;"></textarea>
+					</div>
+					<div style="height: 35px;width: 460px;float: left;">
+                     <div style="float: left;width: 60px; height: 30px;margin-left: 10px;">联系电话:</div>
+					  <input id="phone" type="text" style="    width: 300px;
+                      height: 25px;">
+					</div>
+		         	<div style="float: right;margin-top:2px; margin-bottom:2px; height:30px; ">
+		          	<button type="button" class="butttt" onclick="submitcallback()" style="margin-right: 10px;">提交</button>    
+		            <button type="button" class="butttt" onclick="CloseDiv('Callbackproblems','fade')"  style="margin-right: 20px;">关闭</button>
+	 			    </div>  
+		 			</div>
+		     </div>
+
+				<div id="showtable" class="white-content tables">
+					<a onclick='$("#showtable").hide()' style="    position: absolute;
+                    display: block;
+                    right: 5px;
+                    font-size: 15px;
+                    font-weight: 600;">X</a>
+				<table >
+					<thead>
+                    <tr>
+						<th id="rivername">	</th>
+						<th>氨氮</th>
+						<th>氨氮达标率</th>
+						<th>高锰酸盐</th>
+						<th>高锰酸盐达标率</th>
+						<th>总磷</th>
+						<th>总磷达标率</th>
+						<th>年级达标率</th>
+                    </tr>
+					</thead>
+
+                    <tbody id="showtablecontent">
+
+
+                    </tbody>
+
+				</table>
+			</div>  
+            
+        <!--<div class='picture' hidden>
+            <i class="fa fa-times fa-4x clo-picture" aria-hidden="true"></i>
+            <div id="flipbook">
+
+                <div style="background:url('images/wscpic/jsgqdxsyyxgs.JPG') center"></div>
+                <div style="background:url('images/wscpic/jsyzjsnyxgs.JPG') center"></div>
+                <div style="background:url('images/wscpic/lysbqw1.JPG') center"></div>
+                <div style="background:url('images/wscpic/lysbqw2.JPG') center"></div>
+                <div style="background:url('images/wscpic/lysdew2.JPG') center"></div>
+                <div style="background:url('images/wscpic/lyszzq1.JPG') center"></div>
+                <div style="background:url('images/wscpic/ndxclg.JPG') center"></div>
+                <div style="background:url('images/wscpic/lytmhw.JPG') center"></div>
+            </div>
+            <script type="text/javascript">
+                $("#flipbook").turn({
+                    width: 1300,
+                    height: 500,
+                    autoCenter: false
+                });
+            </script>
+        </div>-->
+        <script type="text/javascript">
+        	 for(var jack in mainriverlist){	 	
+			 	$("#mainriver").append("<option value='"+mainriverlist[jack]+"'>"+mainriverlist[jack]+"</option>");
+			 }
+        
+	        function get_url() 
+	        { 
+	        	$.post("getusername.action",{},function(data){
+	        		$("#username").html(data);
+	        	},"text");
+	        } 
+	        get_url();
+		</script>
+		<script>
+		function getpar(name,type){
+	 		var json="{";
+	 		json += "\"name\":\""+name+"\",";
+	 		json += "\"type\":\""+type+"\"";
+			json += "}";
+		 	var jsonFinal = $.parseJSON(json);
+			 	return jsonFinal;
+		}
+			$.post("getyearandmonth.action",getpar(),function(result){
+				
+			},"json");
+		</script>
+		
+        <script>
+            var year = $("#nianfen option:selected").text();
+            var type = $("#type option:selected").text();
+            var airtype = $("#airtype option:selected").val();
+
+            $("#nianfen").change(function() {
+                year = $("#nianfen option:selected").text();
+                type = $("#type option:selected").text();
+                drawjcdmzb(dmclick, year, type);
+            })
+
+            $("#type").change(function() {
+                year = $("#nianfen option:selected").text();
+                type = $("#type option:selected").text();
+                drawjcdmzb(dmclick, year, type);
+            })
+
+            $("#airtype").change(function() {
+                airtype = $("#airtype option:selected").val();
+                drawaqi(siteName, airtype);
+            })
+			$("#xzdmcharts select").each(function(){
+
+            	$(this).change(function(){
+            		drawxzdm($("#xzdm").html());
+            	})
+            })
+			
+
+			$("#qybcdmcharts select").each(function(){
+
+            	$(this).change(function(){
+            		//alert("456");
+            		drawqyCharts($("#dmmc").text());
+            	})
+            })
+			$("li").each(function(){
+				
+				if(!$(this).hasClass("show-3")){
+					
+					$(this).click(function(){
+						$("#zhiying").empty();	
+						var weizhi="";
+						var yjzy=$(this).parent().parent().html();
+						var nowpoint=$(this).html();
+						$fourparents=$(this).parent().parent().parent().parent();
+		
+						
+						yjzy=yjzy.split("\n")[0];
+						
+						if($fourparents.hasClass("nav")){
+							weizhi+=$fourparents.html().split("\n")[0]+">";
+							weizhi+=yjzy.split("<i")[0]+">";
+							weizhi+=nowpoint;
+						}else{
+							weizhi+=yjzy+">";
+							weizhi+=nowpoint;
+						}
+						
+						
+						$("#zhiying").append(weizhi);
+					});
+				}
+
+			})
+        </script>
+        <script src="json/water.js"></script>
+        <script type="text/javascript" src="js/common.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+            <!--<table class = "tables">
+                <thead>
+                  <tr>
+                    <th>养殖场名</th>
+                    <th>负责人</th>
+                    <th>联系电话</th>
+                    <th>所在禁养区</th>
+                  </tr>
+                <thead>
+                <tbody id="yzccontent">
+                    <td>111</td>
+                    <td>222</td>
+                    <td>333</td>
+                    <td>444</td>
+                </tbody>
+            </table>-->
+        <div id="container" style="min-width: 400px;height:400px"></div>
+        <script>
+            $(function () {
+                var chart= new Highcharts.Chart('container', {          
+                    chart: {
+                        //backgroundColor: "#FFF5EE ",
+                        type: 'column'                         //指定图表的类型，默认是折线图（line）
+                    },
+                    tooltip: {
+                    
+                    pointFormat: '<b>{point.y:.1f}mg/L</b>'
+                     },
+                    title: {
+                        text: '“十二五”大溪水库总氮浓度年际变化情况'                //指定图表标题
+                    },
+                    xAxis: {
+                        categories: ['2011', '2012', '2013','2014', '2015'], //指定x轴分组
+                        title: {
+                            text: '年度'                //指定X轴的标题
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: '氨氮(mg/L)'                //指定y轴的标题
+                        }
+                    },
+                    series: [{
+                        name: '总氨氮浓度',
+                        data: [0.45, 0.445, 0.46, 0.48,0.49]
+                    }],
+                    
+                    credits:{
+                            enabled:false // 禁用版权信息
+                        },
+                    colors: ['#003377'] 
+                })
+});
+
+        </script>
+    </body>
+</html>

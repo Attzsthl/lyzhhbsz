@@ -1,0 +1,66 @@
+<html>
+        <head>
+            <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+        <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+           
+            <div id="container" style="min-width: 400px;height:400px"></div>
+            <script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '2015年较2014年六项污染物月均值升降幅度'
+        },
+        xAxis: {
+            categories: ['1', '2', '3', '4', '5','6','7','8','9','10','11','12'],
+            title:{
+               text:"月份"
+           }
+        },
+        yAxis: {
+           title:{
+               text:"升降幅度(%)"
+           }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '月</b><br/>' +
+                    this.series.name + ': ' + this.y + '%<br/>'
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: '二氧化硫',
+            data: [-28,-28,-28,40,-33,30,0,15,-30,-15,-50,-40]
+        }, {
+            name: '二氧化氮',
+            data: [-49,-31,43,-44,36,33,27,25,-33,51,-52,58]
+        }, {
+            name: '细颗粒物',
+            data: [80,-61,58,56,55,-47,38,-36,38,-58,59,97]
+        },
+         {
+            name: '臭氧',
+            data: [-57,85,96,-128,138,-74,70,-111,116,107,54,39]
+        }, {
+            name: '一氧化碳',
+            data: [87,-73,-69,66,-71,83,66,-71,79,-83,-104,-105]
+        }, {
+            name: '可吸入颗粒物',
+            data: [-130,98,-96,100,-90,73,55,58,-63,101,-86,148]
+        }
+    ]
+    });
+});
+            </script>
+        </body>
+    </html>

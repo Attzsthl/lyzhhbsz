@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+   	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+ 	<meta http-equiv="expires" content="0"> 
+    <title>相关指标统计分析</title>
+    <link rel="shortcut icon" href="images/logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/replay.css">
+    <link rel="stylesheet" href="css/common.css">
+    <script src="js/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script>
+        
+    </script>
+
+    <style>
+        body{
+            overflow: hidden;
+        }
+        iframe{
+            height: 600px;
+            width: 60%;
+            float: right;
+            margin-top: 40px;
+            margin-right: 100px;
+            border: none
+        }
+        .lead{
+            position: absolute;
+            top: 105px;
+            left: 20px;
+            border: solid 2px #BDC8B0;
+            border-radius: 5px;
+            padding: 0;
+        }
+        .lead li{
+            height: 35px;
+            background-color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 2px 2px;
+        }
+        .lead li:hover{
+            background-color: #C9D3C6;
+        }
+        .lead a{
+            height: 100%;
+            width: 100%;
+            line-height: 40px;
+            border-radius: 3px;
+            display: block;
+            padding:0 15px;
+            color: #000;
+        
+        }
+        .lead a:hover{
+            color: #000;
+        }
+        .lead a:visited{
+            color: #000;
+        }
+        .lead div{
+            height: 100%;
+            width: 100%;
+            line-height: 40px;
+        }
+        .fa{
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body style="background-color: white;">
+    <div class="head">
+        <div class="title">
+            <img style="margin-top: 28px;height: 40px;" src="images/tittt.png" draggable="false">
+        </div>
+    </div>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+
+    <ul class = "lead">
+        <li ><div data-num = "gk">概况<i class="fa fa-level-down" aria-hidden="true"></i> </div></li>
+        <li hidden><a class = "gk" data-nam='zhuyaoshuizhi.html'>2015年溧阳市主要河流水质评价结果</a></li>        
+        <li ><div data-num = "yeaw">水质年际变化规律<i class="fa fa-level-down" aria-hidden="true"></i> </div></li>
+        <li hidden><a class = "yeaw" data-nam='wurannianji.html'>“十二五”溧阳市主要河流主要污染物年际变化情况</a></li>
+        <li hidden><a class = "yeaw" data-nam='leibienianji.html'>“十二五”溧阳市河流水质类别比例年际变化</a></li>
+        <li ><div data-num = "hl">溧阳市重点河流<i class="fa fa-level-down" aria-hidden="true"></i> </div></li>
+        <li hidden><a class = "hl" data-nam='jinlicaoshuizhi.html'>丹金溧漕河水质综合污染指数</a></li>
+        <li hidden><a class = "hl" data-nam='jinlicaozhuyao.html'>丹金溧漕河主要污染物浓度</a></li>
+        <li hidden><a class = "hl" data-nam='zhuguishuizhi.html'>竹篑河水质综合污染指数</a></li>
+        <li hidden><a class = "hl" data-nam='zhuguizhuyao.html'>竹篑河主要污染物浓度</a></li>
+        <li hidden><a class = "hl" data-nam='changzhoushuizhi.html'>常州河水质综合污染指数</a></li>
+        <li hidden><a class = "hl" data-nam='changzhouzhuyao.html'>常州河主要污染物浓度</a></li>
+        <li hidden><a class = "hl" data-nam='meizhuhezhuyao.html'>梅渚河河主要污染物</a></li>
+        <li hidden><a class = "hl" data-nam='meizhuheshuizhi.html'>梅渚河水质综合污染指数</a></li>
+        <li hidden><a class = "hl" data-nam='nanheshuizhi.html'>南河水质综合污染指数</a></li>
+        <li hidden><a class = "hl" data-nam='nanhezhuyao.html'>南河主要污染物</a></li>
+        <li ><div data-num = "hk">湖库<i class="fa fa-level-down" aria-hidden="true"></i> </div></li>        
+        <li hidden><a class = "hk" data-nam='daxi.html'>“十二五“大溪水库总氮浓度年际变化情况</a></li>
+        <li hidden><a class = "hk" data-nam='shahe.html'>“十二五”沙河水库总氮浓度年际变化情况</a></li>
+    </ul>
+    <iframe src="images/watercharts/zhuyaoshuizhi.html"></iframe>
+    <script>
+        $(".lead a").click(function(event) {
+            $("iframe").attr('src', "images/watercharts/"+$(this).data('nam'));
+        });
+        
+    </script>
+    <script src="js/fenxi.js"></script>
+
+</body>
+</html>

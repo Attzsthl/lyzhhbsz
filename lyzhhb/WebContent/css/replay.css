@@ -1,0 +1,30 @@
+/*初始化*/
+body,ul,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd,input,a{
+	margin:0;
+	padding:0;
+	font-family:'Open Sans','Helvetica Neue',Arial,'Hiragino Sans GB','Microsoft YaHei','WenQuanYi Micro Hei',
+	sans-serif;
+	-webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    
+    
+	}
+body{font-size:12px;overflow:hidden;}
+img{border:none;}
+li{list-style:none;}
+input,select,textarea{outline:none;border: none;}
+textarea{resize:none;}
+a{text-decoration:none;cursor: pointer}
+
+/*清除浮动、浮动*/
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom: 1;}
+.fl{float: left}
+.fr{float: right;}
+
+
+input::-webkit-input-placeholder { /* WebKit browsers */ 
+color: rgb(230,230,230); 
+font-size: 14px;
+} 

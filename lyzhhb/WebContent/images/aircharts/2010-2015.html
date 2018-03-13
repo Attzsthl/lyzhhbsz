@@ -1,0 +1,132 @@
+<html>
+        <head>
+            <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+            <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+           
+            <div id="container" style="min-width: 400px;height:400px"></div>
+            <div id="container1" style="min-width: 400px;height:400px"></div>
+            <script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '2010-2015年溧阳市污染负荷系数统计图'
+        },
+        xAxis: {
+            categories: ['2010', '2011', '2012', '2013', '2014','2015'],
+            title: {
+                text: '年份'
+            },
+        },
+        yAxis: {
+            labels: {
+                format: '{value}%',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+                min: 0,
+                title: {
+                    text: '污染负荷系数(%)'
+                },
+                stackLabels: {
+                    enabled: false,
+                    style: {
+                        fontWeight: 'bold',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                    },
+                    
+                }
+        },
+        legend: {
+            align: 'center',
+            //x: -100,
+            verticalAlign: 'bottom',
+            //y: 25,
+            floating: false,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '月</b><br/>' +
+                    this.series.name + ': ' + this.y + '%<br/>'
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: '二氧化硫',
+            data: [29.1,31.9,29.9,28.3,23.4,20.6]
+        }, {
+            name: '二氧化氮',
+            data: [20.9,25.8,23.1,25.2,25.1,28.1]
+        }, {
+            name: '可吸入颗粒物',
+            data: [50.0,42.3,47.0,46.5,51.5,51.3]
+        }
+    ],
+        credits:{
+                                enabled:false // 禁用版权信息
+                    },
+        colors: [ '#009FCC', '#886600','#AAAAAA','#FFCC22']            
+    });
+});
+
+
+
+var chart = new Highcharts.Chart('container1', {
+    title: {
+        text: '2010-2015年溧阳市综合污染指数统计图',
+        x: -20
+    },
+
+    xAxis: {
+        categories: ['2010', '2011', '2012', '2013', '2014', '2015']
+    },
+    yAxis: {
+        title: {
+            text: '综合污染指数'
+        },
+        plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+        }]
+    },
+    tooltip: {
+        valueSuffix: ''
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'center',
+        verticalAlign: 'bottom',
+        borderWidth: 0
+    },
+    series: [{
+        name: '综合污染指数',
+        data: [0.74, 0.50, 0.75, 0.70, 0.66, 0.61]
+    }]
+});
+            </script>
+        </body>
+    </html>

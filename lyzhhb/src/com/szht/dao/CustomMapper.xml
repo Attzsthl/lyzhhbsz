@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.szht.dao.CustomMapper" >  
+
+  <select id="GetBcRiverList" resultType="String" >
+    select DISTINCT hlmc from bcinfo
+  </select>
+  <select id="GetDmmcList" resultType="String" >
+    select DISTINCT dmmc from bcinfo
+  </select>
+  <select id="GetBcdmByRiver" resultType="String" >
+    select dmmc from bcinfo where hlmc=#{rivername,jdbcType=VARCHAR} order by dmlb
+  </select>
+  
+    <select id="BcCountYearByName" parameterType="String" resultType="Integer" >
+    select DISTINCT year from bc where dmmc=#{dmmc,jdbcType=VARCHAR} order by year
+  </select>
+    <select id="BcCountMonthByNameAndYear" resultType="Integer" >
+    select DISTINCT month from bc where dmmc=#{0} and year=#{1} order by month
+  </select>
+  
+    <select id="JcdmCountYearByName" parameterType="String" resultType="Integer" >
+    select DISTINCT year from jcdm where dmmc=#{dmmc,jdbcType=VARCHAR} order by year
+  </select>
+    <select id="JcdmCountMonthByNameAndYear" resultType="Integer" >
+    select DISTINCT month from jcdm where dmmc=#{0} and year=#{1} order by month
+  </select>
+  
+    <select id="XzdmCountYearByName" parameterType="String" resultType="Integer" >
+    select DISTINCT year from xzdm where dmmc=#{dmmc,jdbcType=VARCHAR} order by year
+  </select>
+    <select id="XzdmCountSeasonByNameAndYear" resultType="Integer" >
+    select DISTINCT season from xzdm where dmmc=#{0} and year=#{1} order by season
+  </select>
+</mapper>

@@ -1,0 +1,50 @@
+<html>
+        <head>
+            <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+        <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+            <img src="../aircharts/2-103.PNG" alt="">
+            <div id="container" style="min-width: 400px;height:400px"></div>
+            <script>
+                $(function () {
+                    var chart= new Highcharts.Chart('container', {          
+                        chart: {
+                            //backgroundColor: "#FFF5EE ",
+                            type: 'column'                         //指定图表的类型，默认是折线图（line）
+                        },
+                        tooltip: {
+                        
+                        pointFormat: '<b>{point.y:.1f}%</b>'
+                         },
+                        title: {
+                            text: '2015溧阳市区臭氧日均值频率统计图'                //指定图表标题
+                        },
+                        xAxis: {
+                            categories: ['≤20', '21~60', '61~100','101~140', '141~180', '181~240','241~260', '261~300', '≥300'], //指定x轴分组
+                            title: {
+                                text: '日最大8小时平均浓度范围(μg/m³)'                //指定X轴的标题
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text: '频率(%)'                //指定y轴的标题
+                            }
+                        },
+                        series: [{
+                            name: '臭氧日最大8小时平均浓度频率',
+                            data: [3.8, 28.8, 29.9, 22.2, 10.7, 3.8, 0.3, 0, 0]
+                        }],
+                        
+                        credits:{
+                                enabled:false // 禁用版权信息
+                            },
+                        colors: ['#003377'] 
+                    })
+    });
+            </script>
+        </body>
+    </html>

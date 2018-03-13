@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+   <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+        
+        <div id="container" style="min-width: 400px;height:400px"></div>
+        <script>
+            $(function () {
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '2015年溧阳市环境空气质量级别'
+        },
+        tooltip: {
+            headerFormat: '{series.name}<br>',
+            pointFormat: '{point.name}: <b>{point.y}天</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '天数：',
+            data: [
+                ['优',   55],
+                ['良',       210],
+                ['轻度污染', 76],
+                ['中度污染',    20],
+                ['重度污染',     5]
+            ]
+        }],
+        credits:{
+                            enabled:false // 禁用版权信息
+                },
+        colors: ['#00FF00', '#BBBB00', '#CC6600','#FF3333','#660077']        
+    });
+});
+        </script>
+    </body>
+</html>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.szht.dao.ProblemsMapper" >
+  <resultMap id="BaseResultMap" type="com.szht.model.Problems" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="lon" property="lon" jdbcType="DOUBLE" />
+    <result column="lat" property="lat" jdbcType="DOUBLE" />
+    <result column="disc" property="disc" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="submittime" property="submittime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="slovetime" property="slovetime" jdbcType="TIMESTAMP" />
+    <result column="solver" property="solver" jdbcType="VARCHAR" />
+    <result column="suggest" property="suggest" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, lon, lat, disc, telephone, username, submittime, status, slovetime, solver, suggest
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.szht.model.ProblemsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from problems
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from problems
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from problems
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szht.model.ProblemsExample" >
+    delete from problems
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szht.model.Problems" >
+    insert into problems (id, lon, lat, disc, 
+      telephone, username, submittime, 
+      status, slovetime, solver, 
+      suggest)
+    values (#{id,jdbcType=INTEGER}, #{lon,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE}, #{disc,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{submittime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{slovetime,jdbcType=TIMESTAMP}, #{solver,jdbcType=VARCHAR}, 
+      #{suggest,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.szht.model.Problems" >
+    insert into problems
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lon != null" >
+        lon,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="disc != null" >
+        disc,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="submittime != null" >
+        submittime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="slovetime != null" >
+        slovetime,
+      </if>
+      <if test="solver != null" >
+        solver,
+      </if>
+      <if test="suggest != null" >
+        suggest,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lon != null" >
+        #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="disc != null" >
+        #{disc,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null" >
+        #{submittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="slovetime != null" >
+        #{slovetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="solver != null" >
+        #{solver,jdbcType=VARCHAR},
+      </if>
+      <if test="suggest != null" >
+        #{suggest,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szht.model.ProblemsExample" resultType="java.lang.Integer" >
+    select count(*) from problems
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update problems
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.lon != null" >
+        lon = #{record.lon,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lat != null" >
+        lat = #{record.lat,jdbcType=DOUBLE},
+      </if>
+      <if test="record.disc != null" >
+        disc = #{record.disc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submittime != null" >
+        submittime = #{record.submittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slovetime != null" >
+        slovetime = #{record.slovetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.solver != null" >
+        solver = #{record.solver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suggest != null" >
+        suggest = #{record.suggest,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update problems
+    set id = #{record.id,jdbcType=INTEGER},
+      lon = #{record.lon,jdbcType=DOUBLE},
+      lat = #{record.lat,jdbcType=DOUBLE},
+      disc = #{record.disc,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      submittime = #{record.submittime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR},
+      slovetime = #{record.slovetime,jdbcType=TIMESTAMP},
+      solver = #{record.solver,jdbcType=VARCHAR},
+      suggest = #{record.suggest,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szht.model.Problems" >
+    update problems
+    <set >
+      <if test="lon != null" >
+        lon = #{lon,jdbcType=DOUBLE},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=DOUBLE},
+      </if>
+      <if test="disc != null" >
+        disc = #{disc,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null" >
+        submittime = #{submittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="slovetime != null" >
+        slovetime = #{slovetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="solver != null" >
+        solver = #{solver,jdbcType=VARCHAR},
+      </if>
+      <if test="suggest != null" >
+        suggest = #{suggest,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szht.model.Problems" >
+    update problems
+    set lon = #{lon,jdbcType=DOUBLE},
+      lat = #{lat,jdbcType=DOUBLE},
+      disc = #{disc,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      submittime = #{submittime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      slovetime = #{slovetime,jdbcType=TIMESTAMP},
+      solver = #{solver,jdbcType=VARCHAR},
+      suggest = #{suggest,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

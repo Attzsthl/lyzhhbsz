@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+            <!--<table class = "tables">
+                <thead>
+                  <tr>
+                    <th>养殖场名</th>
+                    <th>负责人</th>
+                    <th>联系电话</th>
+                    <th>所在禁养区</th>
+                  </tr>
+                <thead>
+                <tbody id="yzccontent">
+                    <td>111</td>
+                    <td>222</td>
+                    <td>333</td>
+                    <td>444</td>
+                </tbody>
+            </table>-->
+        <div id="container" style="min-width: 400px;height:400px"></div>
+        <div id="container1" style="min-width: 400px;height:400px"></div>
+        <div id="container2" style="min-width: 400px;height:400px"></div>
+        <script>
+            $(function () {
+                var chart= new Highcharts.Chart('container', {          
+                    chart: {
+                        //backgroundColor: "#FFF5EE ",
+                        type: 'column'                         //指定图表的类型，默认是折线图（line）
+                    },
+                    tooltip: {
+                    
+                    pointFormat: '<b>{point.y:.1f}mg/L</b>'
+                     },
+                    title: {
+                        text: '“十二五”常州河主要污染物年际变化情况'                //指定图表标题
+                    },
+                    xAxis: {
+                        categories: ['2011', '2012', '2013','2014', '2015'], //指定x轴分组
+                        title: {
+                            text: '年度'                //指定X轴的标题
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: '氨氮(mg/L)'                //指定y轴的标题
+                        }
+                    },
+                    series: [{
+                        name: '常州河氨氮平均浓度',
+                        data: [0.44, 0.44, 0.46, 0.55,0.52]
+                    }],
+                    
+                    credits:{
+                            enabled:false // 禁用版权信息
+                        },
+                    colors: ['#003377'] 
+                })
+});
+
+            $(function () {
+                var chart= new Highcharts.Chart('container1', {          
+                    chart: {
+                        //backgroundColor: "#FFF5EE ",
+                        type: 'column'                         //指定图表的类型，默认是折线图（line）
+                    },
+                    tooltip: {
+                    
+                    pointFormat: '<b>{point.y:.2f}mg/L</b>'
+                     },
+                    title: {
+                        text: ''                //指定图表标题
+                    },
+                    xAxis: {
+                        categories: ['2011', '2012', '2013','2014', '2015'], //指定x轴分组
+                        title: {
+                            text: '年度'                //指定X轴的标题
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: '石油类(mg/L)'                //指定y轴的标题
+                        }
+                    },
+                    series: [{
+                        name: '常州河石油类平均浓度',
+                        data: [0.034, 0.03, 0.03, 0.036, 0.04]
+                    }],
+                    
+                    credits:{
+                            enabled:false // 禁用版权信息
+                        },
+                    colors: ['#00AA00'] 
+                })
+            });
+
+            $(function () {
+                var chart= new Highcharts.Chart('container2', {          
+                    chart: {
+                        //backgroundColor: "#FFF5EE ",
+                        type: 'column'                         //指定图表的类型，默认是折线图（line）
+                    },
+                    tooltip: {
+                    
+                    pointFormat: '<b>{point.y:.1f}mg/L</b>'
+                     },
+                    title: {
+                        text: ''                //指定图表标题
+                    },
+                    xAxis: {
+                        categories: ['2011', '2012', '2013','2014', '2015'], //指定x轴分组
+                        title: {
+                            text: '年度'                //指定X轴的标题
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: '化学需氧量(mg/L)'                //指定y轴的标题
+                        }
+                    },
+                    series: [{
+                        name: '常州河化学需氧量平均浓度',
+                        data: [16, 17, 17.5, 17, 18]
+                    }],
+                    
+                    credits:{
+                            enabled:false // 禁用版权信息
+                        },
+                    colors: ['#AA7700'] 
+                })
+            });
+        </script>
+    </body>
+</html>

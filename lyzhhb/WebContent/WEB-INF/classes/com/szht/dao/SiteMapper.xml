@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.szht.dao.SiteMapper" >
+  <resultMap id="BaseResultMap" type="com.szht.model.Site" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="aqi" property="aqi" jdbcType="VARCHAR" />
+    <result column="co" property="co" jdbcType="VARCHAR" />
+    <result column="ct" property="ct" jdbcType="VARCHAR" />
+    <result column="no2" property="no2" jdbcType="VARCHAR" />
+    <result column="o3" property="o3" jdbcType="VARCHAR" />
+    <result column="o3_8h" property="o38h" jdbcType="VARCHAR" />
+    <result column="pm10" property="pm10" jdbcType="VARCHAR" />
+    <result column="pm2_5" property="pm25" jdbcType="VARCHAR" />
+    <result column="primary_pollutant" property="primaryPollutant" jdbcType="VARCHAR" />
+    <result column="quality" property="quality" jdbcType="VARCHAR" />
+    <result column="site_name" property="siteName" jdbcType="VARCHAR" />
+    <result column="so2" property="so2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, aqi, co, ct, no2, o3, o3_8h, pm10, pm2_5, primary_pollutant, quality, site_name, 
+    so2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.szht.model.SiteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from site
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from site
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from site
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szht.model.SiteExample" >
+    delete from site
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szht.model.Site" >
+    insert into site (id, aqi, co, 
+      ct, no2, o3, o3_8h, 
+      pm10, pm2_5, primary_pollutant, 
+      quality, site_name, so2
+      )
+    values (#{id,jdbcType=INTEGER}, #{aqi,jdbcType=VARCHAR}, #{co,jdbcType=VARCHAR}, 
+      #{ct,jdbcType=VARCHAR}, #{no2,jdbcType=VARCHAR}, #{o3,jdbcType=VARCHAR}, #{o38h,jdbcType=VARCHAR}, 
+      #{pm10,jdbcType=VARCHAR}, #{pm25,jdbcType=VARCHAR}, #{primaryPollutant,jdbcType=VARCHAR}, 
+      #{quality,jdbcType=VARCHAR}, #{siteName,jdbcType=VARCHAR}, #{so2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.szht.model.Site" >
+    insert into site
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="aqi != null" >
+        aqi,
+      </if>
+      <if test="co != null" >
+        co,
+      </if>
+      <if test="ct != null" >
+        ct,
+      </if>
+      <if test="no2 != null" >
+        no2,
+      </if>
+      <if test="o3 != null" >
+        o3,
+      </if>
+      <if test="o38h != null" >
+        o3_8h,
+      </if>
+      <if test="pm10 != null" >
+        pm10,
+      </if>
+      <if test="pm25 != null" >
+        pm2_5,
+      </if>
+      <if test="primaryPollutant != null" >
+        primary_pollutant,
+      </if>
+      <if test="quality != null" >
+        quality,
+      </if>
+      <if test="siteName != null" >
+        site_name,
+      </if>
+      <if test="so2 != null" >
+        so2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="aqi != null" >
+        #{aqi,jdbcType=VARCHAR},
+      </if>
+      <if test="co != null" >
+        #{co,jdbcType=VARCHAR},
+      </if>
+      <if test="ct != null" >
+        #{ct,jdbcType=VARCHAR},
+      </if>
+      <if test="no2 != null" >
+        #{no2,jdbcType=VARCHAR},
+      </if>
+      <if test="o3 != null" >
+        #{o3,jdbcType=VARCHAR},
+      </if>
+      <if test="o38h != null" >
+        #{o38h,jdbcType=VARCHAR},
+      </if>
+      <if test="pm10 != null" >
+        #{pm10,jdbcType=VARCHAR},
+      </if>
+      <if test="pm25 != null" >
+        #{pm25,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryPollutant != null" >
+        #{primaryPollutant,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null" >
+        #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="siteName != null" >
+        #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="so2 != null" >
+        #{so2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szht.model.SiteExample" resultType="java.lang.Integer" >
+    select count(*) from site
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update site
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.aqi != null" >
+        aqi = #{record.aqi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.co != null" >
+        co = #{record.co,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ct != null" >
+        ct = #{record.ct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.no2 != null" >
+        no2 = #{record.no2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.o3 != null" >
+        o3 = #{record.o3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.o38h != null" >
+        o3_8h = #{record.o38h,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pm10 != null" >
+        pm10 = #{record.pm10,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pm25 != null" >
+        pm2_5 = #{record.pm25,jdbcType=VARCHAR},
+      </if>
+      <if test="record.primaryPollutant != null" >
+        primary_pollutant = #{record.primaryPollutant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quality != null" >
+        quality = #{record.quality,jdbcType=VARCHAR},
+      </if>
+      <if test="record.siteName != null" >
+        site_name = #{record.siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.so2 != null" >
+        so2 = #{record.so2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update site
+    set id = #{record.id,jdbcType=INTEGER},
+      aqi = #{record.aqi,jdbcType=VARCHAR},
+      co = #{record.co,jdbcType=VARCHAR},
+      ct = #{record.ct,jdbcType=VARCHAR},
+      no2 = #{record.no2,jdbcType=VARCHAR},
+      o3 = #{record.o3,jdbcType=VARCHAR},
+      o3_8h = #{record.o38h,jdbcType=VARCHAR},
+      pm10 = #{record.pm10,jdbcType=VARCHAR},
+      pm2_5 = #{record.pm25,jdbcType=VARCHAR},
+      primary_pollutant = #{record.primaryPollutant,jdbcType=VARCHAR},
+      quality = #{record.quality,jdbcType=VARCHAR},
+      site_name = #{record.siteName,jdbcType=VARCHAR},
+      so2 = #{record.so2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szht.model.Site" >
+    update site
+    <set >
+      <if test="aqi != null" >
+        aqi = #{aqi,jdbcType=VARCHAR},
+      </if>
+      <if test="co != null" >
+        co = #{co,jdbcType=VARCHAR},
+      </if>
+      <if test="ct != null" >
+        ct = #{ct,jdbcType=VARCHAR},
+      </if>
+      <if test="no2 != null" >
+        no2 = #{no2,jdbcType=VARCHAR},
+      </if>
+      <if test="o3 != null" >
+        o3 = #{o3,jdbcType=VARCHAR},
+      </if>
+      <if test="o38h != null" >
+        o3_8h = #{o38h,jdbcType=VARCHAR},
+      </if>
+      <if test="pm10 != null" >
+        pm10 = #{pm10,jdbcType=VARCHAR},
+      </if>
+      <if test="pm25 != null" >
+        pm2_5 = #{pm25,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryPollutant != null" >
+        primary_pollutant = #{primaryPollutant,jdbcType=VARCHAR},
+      </if>
+      <if test="quality != null" >
+        quality = #{quality,jdbcType=VARCHAR},
+      </if>
+      <if test="siteName != null" >
+        site_name = #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="so2 != null" >
+        so2 = #{so2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szht.model.Site" >
+    update site
+    set aqi = #{aqi,jdbcType=VARCHAR},
+      co = #{co,jdbcType=VARCHAR},
+      ct = #{ct,jdbcType=VARCHAR},
+      no2 = #{no2,jdbcType=VARCHAR},
+      o3 = #{o3,jdbcType=VARCHAR},
+      o3_8h = #{o38h,jdbcType=VARCHAR},
+      pm10 = #{pm10,jdbcType=VARCHAR},
+      pm2_5 = #{pm25,jdbcType=VARCHAR},
+      primary_pollutant = #{primaryPollutant,jdbcType=VARCHAR},
+      quality = #{quality,jdbcType=VARCHAR},
+      site_name = #{siteName,jdbcType=VARCHAR},
+      so2 = #{so2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

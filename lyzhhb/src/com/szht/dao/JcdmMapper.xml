@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.szht.dao.JcdmMapper" >
+  <resultMap id="BaseResultMap" type="com.szht.model.Jcdm" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="andan" property="andan" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="diandaolv" property="diandaolv" jdbcType="VARCHAR" />
+    <result column="dmmc" property="dmmc" jdbcType="VARCHAR" />
+    <result column="flza" property="flza" jdbcType="VARCHAR" />
+    <result column="fuhuawu" property="fuhuawu" jdbcType="VARCHAR" />
+    <result column="ge" property="ge" jdbcType="VARCHAR" />
+    <result column="gmsy" property="gmsy" jdbcType="VARCHAR" />
+    <result column="gong" property="gong" jdbcType="VARCHAR" />
+    <result column="hlmc" property="hlmc" jdbcType="VARCHAR" />
+    <result column="huifafen" property="huifafen" jdbcType="VARCHAR" />
+    <result column="hxxyl" property="hxxyl" jdbcType="VARCHAR" />
+    <result column="liuhuawu" property="liuhuawu" jdbcType="VARCHAR" />
+    <result column="liujiage" property="liujiage" jdbcType="VARCHAR" />
+    <result column="liuliang" property="liuliang" jdbcType="VARCHAR" />
+    <result column="liusuanyan" property="liusuanyan" jdbcType="VARCHAR" />
+    <result column="lvhuawu" property="lvhuawu" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="ph" property="ph" jdbcType="VARCHAR" />
+    <result column="qian" property="qian" jdbcType="VARCHAR" />
+    <result column="rongjieyanng" property="rongjieyanng" jdbcType="VARCHAR" />
+    <result column="shen" property="shen" jdbcType="VARCHAR" />
+    <result column="shiyoulei" property="shiyoulei" jdbcType="VARCHAR" />
+    <result column="shuishen" property="shuishen" jdbcType="VARCHAR" />
+    <result column="shuiweng" property="shuiweng" jdbcType="VARCHAR" />
+    <result column="shxyl" property="shxyl" jdbcType="VARCHAR" />
+    <result column="sqdm" property="sqdm" jdbcType="VARCHAR" />
+    <result column="xi" property="xi" jdbcType="VARCHAR" />
+    <result column="xiaosuanyan" property="xiaosuanyan" jdbcType="VARCHAR" />
+    <result column="xuanfuwu" property="xuanfuwu" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="yxsy" property="yxsy" jdbcType="VARCHAR" />
+    <result column="zjhw" property="zjhw" jdbcType="VARCHAR" />
+    <result column="zongdan" property="zongdan" jdbcType="VARCHAR" />
+    <result column="zongling" property="zongling" jdbcType="VARCHAR" />
+    <result column="zongyingdu" property="zongyingdu" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, andan, date, diandaolv, dmmc, flza, fuhuawu, ge, gmsy, gong, hlmc, huifafen, 
+    hxxyl, liuhuawu, liujiage, liuliang, liusuanyan, lvhuawu, month, ph, qian, rongjieyanng, 
+    shen, shiyoulei, shuishen, shuiweng, shxyl, sqdm, xi, xiaosuanyan, xuanfuwu, year, 
+    yxsy, zjhw, zongdan, zongling, zongyingdu
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.szht.model.JcdmExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jcdm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jcdm
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jcdm
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szht.model.JcdmExample" >
+    delete from jcdm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szht.model.Jcdm" >
+    insert into jcdm (id, andan, date, 
+      diandaolv, dmmc, flza, 
+      fuhuawu, ge, gmsy, 
+      gong, hlmc, huifafen, 
+      hxxyl, liuhuawu, liujiage, 
+      liuliang, liusuanyan, lvhuawu, 
+      month, ph, qian, rongjieyanng, 
+      shen, shiyoulei, shuishen, 
+      shuiweng, shxyl, sqdm, 
+      xi, xiaosuanyan, xuanfuwu, 
+      year, yxsy, zjhw, zongdan, 
+      zongling, zongyingdu)
+    values (#{id,jdbcType=INTEGER}, #{andan,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, 
+      #{diandaolv,jdbcType=VARCHAR}, #{dmmc,jdbcType=VARCHAR}, #{flza,jdbcType=VARCHAR}, 
+      #{fuhuawu,jdbcType=VARCHAR}, #{ge,jdbcType=VARCHAR}, #{gmsy,jdbcType=VARCHAR}, 
+      #{gong,jdbcType=VARCHAR}, #{hlmc,jdbcType=VARCHAR}, #{huifafen,jdbcType=VARCHAR}, 
+      #{hxxyl,jdbcType=VARCHAR}, #{liuhuawu,jdbcType=VARCHAR}, #{liujiage,jdbcType=VARCHAR}, 
+      #{liuliang,jdbcType=VARCHAR}, #{liusuanyan,jdbcType=VARCHAR}, #{lvhuawu,jdbcType=VARCHAR}, 
+      #{month,jdbcType=INTEGER}, #{ph,jdbcType=VARCHAR}, #{qian,jdbcType=VARCHAR}, #{rongjieyanng,jdbcType=VARCHAR}, 
+      #{shen,jdbcType=VARCHAR}, #{shiyoulei,jdbcType=VARCHAR}, #{shuishen,jdbcType=VARCHAR}, 
+      #{shuiweng,jdbcType=VARCHAR}, #{shxyl,jdbcType=VARCHAR}, #{sqdm,jdbcType=VARCHAR}, 
+      #{xi,jdbcType=VARCHAR}, #{xiaosuanyan,jdbcType=VARCHAR}, #{xuanfuwu,jdbcType=VARCHAR}, 
+      #{year,jdbcType=INTEGER}, #{yxsy,jdbcType=VARCHAR}, #{zjhw,jdbcType=VARCHAR}, #{zongdan,jdbcType=VARCHAR}, 
+      #{zongling,jdbcType=VARCHAR}, #{zongyingdu,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.szht.model.Jcdm" >
+    insert into jcdm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="andan != null" >
+        andan,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="diandaolv != null" >
+        diandaolv,
+      </if>
+      <if test="dmmc != null" >
+        dmmc,
+      </if>
+      <if test="flza != null" >
+        flza,
+      </if>
+      <if test="fuhuawu != null" >
+        fuhuawu,
+      </if>
+      <if test="ge != null" >
+        ge,
+      </if>
+      <if test="gmsy != null" >
+        gmsy,
+      </if>
+      <if test="gong != null" >
+        gong,
+      </if>
+      <if test="hlmc != null" >
+        hlmc,
+      </if>
+      <if test="huifafen != null" >
+        huifafen,
+      </if>
+      <if test="hxxyl != null" >
+        hxxyl,
+      </if>
+      <if test="liuhuawu != null" >
+        liuhuawu,
+      </if>
+      <if test="liujiage != null" >
+        liujiage,
+      </if>
+      <if test="liuliang != null" >
+        liuliang,
+      </if>
+      <if test="liusuanyan != null" >
+        liusuanyan,
+      </if>
+      <if test="lvhuawu != null" >
+        lvhuawu,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="ph != null" >
+        ph,
+      </if>
+      <if test="qian != null" >
+        qian,
+      </if>
+      <if test="rongjieyanng != null" >
+        rongjieyanng,
+      </if>
+      <if test="shen != null" >
+        shen,
+      </if>
+      <if test="shiyoulei != null" >
+        shiyoulei,
+      </if>
+      <if test="shuishen != null" >
+        shuishen,
+      </if>
+      <if test="shuiweng != null" >
+        shuiweng,
+      </if>
+      <if test="shxyl != null" >
+        shxyl,
+      </if>
+      <if test="sqdm != null" >
+        sqdm,
+      </if>
+      <if test="xi != null" >
+        xi,
+      </if>
+      <if test="xiaosuanyan != null" >
+        xiaosuanyan,
+      </if>
+      <if test="xuanfuwu != null" >
+        xuanfuwu,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="yxsy != null" >
+        yxsy,
+      </if>
+      <if test="zjhw != null" >
+        zjhw,
+      </if>
+      <if test="zongdan != null" >
+        zongdan,
+      </if>
+      <if test="zongling != null" >
+        zongling,
+      </if>
+      <if test="zongyingdu != null" >
+        zongyingdu,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="andan != null" >
+        #{andan,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="diandaolv != null" >
+        #{diandaolv,jdbcType=VARCHAR},
+      </if>
+      <if test="dmmc != null" >
+        #{dmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="flza != null" >
+        #{flza,jdbcType=VARCHAR},
+      </if>
+      <if test="fuhuawu != null" >
+        #{fuhuawu,jdbcType=VARCHAR},
+      </if>
+      <if test="ge != null" >
+        #{ge,jdbcType=VARCHAR},
+      </if>
+      <if test="gmsy != null" >
+        #{gmsy,jdbcType=VARCHAR},
+      </if>
+      <if test="gong != null" >
+        #{gong,jdbcType=VARCHAR},
+      </if>
+      <if test="hlmc != null" >
+        #{hlmc,jdbcType=VARCHAR},
+      </if>
+      <if test="huifafen != null" >
+        #{huifafen,jdbcType=VARCHAR},
+      </if>
+      <if test="hxxyl != null" >
+        #{hxxyl,jdbcType=VARCHAR},
+      </if>
+      <if test="liuhuawu != null" >
+        #{liuhuawu,jdbcType=VARCHAR},
+      </if>
+      <if test="liujiage != null" >
+        #{liujiage,jdbcType=VARCHAR},
+      </if>
+      <if test="liuliang != null" >
+        #{liuliang,jdbcType=VARCHAR},
+      </if>
+      <if test="liusuanyan != null" >
+        #{liusuanyan,jdbcType=VARCHAR},
+      </if>
+      <if test="lvhuawu != null" >
+        #{lvhuawu,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="ph != null" >
+        #{ph,jdbcType=VARCHAR},
+      </if>
+      <if test="qian != null" >
+        #{qian,jdbcType=VARCHAR},
+      </if>
+      <if test="rongjieyanng != null" >
+        #{rongjieyanng,jdbcType=VARCHAR},
+      </if>
+      <if test="shen != null" >
+        #{shen,jdbcType=VARCHAR},
+      </if>
+      <if test="shiyoulei != null" >
+        #{shiyoulei,jdbcType=VARCHAR},
+      </if>
+      <if test="shuishen != null" >
+        #{shuishen,jdbcType=VARCHAR},
+      </if>
+      <if test="shuiweng != null" >
+        #{shuiweng,jdbcType=VARCHAR},
+      </if>
+      <if test="shxyl != null" >
+        #{shxyl,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdm != null" >
+        #{sqdm,jdbcType=VARCHAR},
+      </if>
+      <if test="xi != null" >
+        #{xi,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaosuanyan != null" >
+        #{xiaosuanyan,jdbcType=VARCHAR},
+      </if>
+      <if test="xuanfuwu != null" >
+        #{xuanfuwu,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="yxsy != null" >
+        #{yxsy,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhw != null" >
+        #{zjhw,jdbcType=VARCHAR},
+      </if>
+      <if test="zongdan != null" >
+        #{zongdan,jdbcType=VARCHAR},
+      </if>
+      <if test="zongling != null" >
+        #{zongling,jdbcType=VARCHAR},
+      </if>
+      <if test="zongyingdu != null" >
+        #{zongyingdu,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szht.model.JcdmExample" resultType="java.lang.Integer" >
+    select count(*) from jcdm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update jcdm
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.andan != null" >
+        andan = #{record.andan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diandaolv != null" >
+        diandaolv = #{record.diandaolv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dmmc != null" >
+        dmmc = #{record.dmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flza != null" >
+        flza = #{record.flza,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fuhuawu != null" >
+        fuhuawu = #{record.fuhuawu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ge != null" >
+        ge = #{record.ge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gmsy != null" >
+        gmsy = #{record.gmsy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gong != null" >
+        gong = #{record.gong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hlmc != null" >
+        hlmc = #{record.hlmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.huifafen != null" >
+        huifafen = #{record.huifafen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hxxyl != null" >
+        hxxyl = #{record.hxxyl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liuhuawu != null" >
+        liuhuawu = #{record.liuhuawu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liujiage != null" >
+        liujiage = #{record.liujiage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liuliang != null" >
+        liuliang = #{record.liuliang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liusuanyan != null" >
+        liusuanyan = #{record.liusuanyan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lvhuawu != null" >
+        lvhuawu = #{record.lvhuawu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=INTEGER},
+      </if>
+      <if test="record.ph != null" >
+        ph = #{record.ph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qian != null" >
+        qian = #{record.qian,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rongjieyanng != null" >
+        rongjieyanng = #{record.rongjieyanng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shen != null" >
+        shen = #{record.shen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shiyoulei != null" >
+        shiyoulei = #{record.shiyoulei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shuishen != null" >
+        shuishen = #{record.shuishen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shuiweng != null" >
+        shuiweng = #{record.shuiweng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shxyl != null" >
+        shxyl = #{record.shxyl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqdm != null" >
+        sqdm = #{record.sqdm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xi != null" >
+        xi = #{record.xi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xiaosuanyan != null" >
+        xiaosuanyan = #{record.xiaosuanyan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xuanfuwu != null" >
+        xuanfuwu = #{record.xuanfuwu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.yxsy != null" >
+        yxsy = #{record.yxsy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zjhw != null" >
+        zjhw = #{record.zjhw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zongdan != null" >
+        zongdan = #{record.zongdan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zongling != null" >
+        zongling = #{record.zongling,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zongyingdu != null" >
+        zongyingdu = #{record.zongyingdu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update jcdm
+    set id = #{record.id,jdbcType=INTEGER},
+      andan = #{record.andan,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=VARCHAR},
+      diandaolv = #{record.diandaolv,jdbcType=VARCHAR},
+      dmmc = #{record.dmmc,jdbcType=VARCHAR},
+      flza = #{record.flza,jdbcType=VARCHAR},
+      fuhuawu = #{record.fuhuawu,jdbcType=VARCHAR},
+      ge = #{record.ge,jdbcType=VARCHAR},
+      gmsy = #{record.gmsy,jdbcType=VARCHAR},
+      gong = #{record.gong,jdbcType=VARCHAR},
+      hlmc = #{record.hlmc,jdbcType=VARCHAR},
+      huifafen = #{record.huifafen,jdbcType=VARCHAR},
+      hxxyl = #{record.hxxyl,jdbcType=VARCHAR},
+      liuhuawu = #{record.liuhuawu,jdbcType=VARCHAR},
+      liujiage = #{record.liujiage,jdbcType=VARCHAR},
+      liuliang = #{record.liuliang,jdbcType=VARCHAR},
+      liusuanyan = #{record.liusuanyan,jdbcType=VARCHAR},
+      lvhuawu = #{record.lvhuawu,jdbcType=VARCHAR},
+      month = #{record.month,jdbcType=INTEGER},
+      ph = #{record.ph,jdbcType=VARCHAR},
+      qian = #{record.qian,jdbcType=VARCHAR},
+      rongjieyanng = #{record.rongjieyanng,jdbcType=VARCHAR},
+      shen = #{record.shen,jdbcType=VARCHAR},
+      shiyoulei = #{record.shiyoulei,jdbcType=VARCHAR},
+      shuishen = #{record.shuishen,jdbcType=VARCHAR},
+      shuiweng = #{record.shuiweng,jdbcType=VARCHAR},
+      shxyl = #{record.shxyl,jdbcType=VARCHAR},
+      sqdm = #{record.sqdm,jdbcType=VARCHAR},
+      xi = #{record.xi,jdbcType=VARCHAR},
+      xiaosuanyan = #{record.xiaosuanyan,jdbcType=VARCHAR},
+      xuanfuwu = #{record.xuanfuwu,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=INTEGER},
+      yxsy = #{record.yxsy,jdbcType=VARCHAR},
+      zjhw = #{record.zjhw,jdbcType=VARCHAR},
+      zongdan = #{record.zongdan,jdbcType=VARCHAR},
+      zongling = #{record.zongling,jdbcType=VARCHAR},
+      zongyingdu = #{record.zongyingdu,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szht.model.Jcdm" >
+    update jcdm
+    <set >
+      <if test="andan != null" >
+        andan = #{andan,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="diandaolv != null" >
+        diandaolv = #{diandaolv,jdbcType=VARCHAR},
+      </if>
+      <if test="dmmc != null" >
+        dmmc = #{dmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="flza != null" >
+        flza = #{flza,jdbcType=VARCHAR},
+      </if>
+      <if test="fuhuawu != null" >
+        fuhuawu = #{fuhuawu,jdbcType=VARCHAR},
+      </if>
+      <if test="ge != null" >
+        ge = #{ge,jdbcType=VARCHAR},
+      </if>
+      <if test="gmsy != null" >
+        gmsy = #{gmsy,jdbcType=VARCHAR},
+      </if>
+      <if test="gong != null" >
+        gong = #{gong,jdbcType=VARCHAR},
+      </if>
+      <if test="hlmc != null" >
+        hlmc = #{hlmc,jdbcType=VARCHAR},
+      </if>
+      <if test="huifafen != null" >
+        huifafen = #{huifafen,jdbcType=VARCHAR},
+      </if>
+      <if test="hxxyl != null" >
+        hxxyl = #{hxxyl,jdbcType=VARCHAR},
+      </if>
+      <if test="liuhuawu != null" >
+        liuhuawu = #{liuhuawu,jdbcType=VARCHAR},
+      </if>
+      <if test="liujiage != null" >
+        liujiage = #{liujiage,jdbcType=VARCHAR},
+      </if>
+      <if test="liuliang != null" >
+        liuliang = #{liuliang,jdbcType=VARCHAR},
+      </if>
+      <if test="liusuanyan != null" >
+        liusuanyan = #{liusuanyan,jdbcType=VARCHAR},
+      </if>
+      <if test="lvhuawu != null" >
+        lvhuawu = #{lvhuawu,jdbcType=VARCHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="ph != null" >
+        ph = #{ph,jdbcType=VARCHAR},
+      </if>
+      <if test="qian != null" >
+        qian = #{qian,jdbcType=VARCHAR},
+      </if>
+      <if test="rongjieyanng != null" >
+        rongjieyanng = #{rongjieyanng,jdbcType=VARCHAR},
+      </if>
+      <if test="shen != null" >
+        shen = #{shen,jdbcType=VARCHAR},
+      </if>
+      <if test="shiyoulei != null" >
+        shiyoulei = #{shiyoulei,jdbcType=VARCHAR},
+      </if>
+      <if test="shuishen != null" >
+        shuishen = #{shuishen,jdbcType=VARCHAR},
+      </if>
+      <if test="shuiweng != null" >
+        shuiweng = #{shuiweng,jdbcType=VARCHAR},
+      </if>
+      <if test="shxyl != null" >
+        shxyl = #{shxyl,jdbcType=VARCHAR},
+      </if>
+      <if test="sqdm != null" >
+        sqdm = #{sqdm,jdbcType=VARCHAR},
+      </if>
+      <if test="xi != null" >
+        xi = #{xi,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaosuanyan != null" >
+        xiaosuanyan = #{xiaosuanyan,jdbcType=VARCHAR},
+      </if>
+      <if test="xuanfuwu != null" >
+        xuanfuwu = #{xuanfuwu,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="yxsy != null" >
+        yxsy = #{yxsy,jdbcType=VARCHAR},
+      </if>
+      <if test="zjhw != null" >
+        zjhw = #{zjhw,jdbcType=VARCHAR},
+      </if>
+      <if test="zongdan != null" >
+        zongdan = #{zongdan,jdbcType=VARCHAR},
+      </if>
+      <if test="zongling != null" >
+        zongling = #{zongling,jdbcType=VARCHAR},
+      </if>
+      <if test="zongyingdu != null" >
+        zongyingdu = #{zongyingdu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szht.model.Jcdm" >
+    update jcdm
+    set andan = #{andan,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR},
+      diandaolv = #{diandaolv,jdbcType=VARCHAR},
+      dmmc = #{dmmc,jdbcType=VARCHAR},
+      flza = #{flza,jdbcType=VARCHAR},
+      fuhuawu = #{fuhuawu,jdbcType=VARCHAR},
+      ge = #{ge,jdbcType=VARCHAR},
+      gmsy = #{gmsy,jdbcType=VARCHAR},
+      gong = #{gong,jdbcType=VARCHAR},
+      hlmc = #{hlmc,jdbcType=VARCHAR},
+      huifafen = #{huifafen,jdbcType=VARCHAR},
+      hxxyl = #{hxxyl,jdbcType=VARCHAR},
+      liuhuawu = #{liuhuawu,jdbcType=VARCHAR},
+      liujiage = #{liujiage,jdbcType=VARCHAR},
+      liuliang = #{liuliang,jdbcType=VARCHAR},
+      liusuanyan = #{liusuanyan,jdbcType=VARCHAR},
+      lvhuawu = #{lvhuawu,jdbcType=VARCHAR},
+      month = #{month,jdbcType=INTEGER},
+      ph = #{ph,jdbcType=VARCHAR},
+      qian = #{qian,jdbcType=VARCHAR},
+      rongjieyanng = #{rongjieyanng,jdbcType=VARCHAR},
+      shen = #{shen,jdbcType=VARCHAR},
+      shiyoulei = #{shiyoulei,jdbcType=VARCHAR},
+      shuishen = #{shuishen,jdbcType=VARCHAR},
+      shuiweng = #{shuiweng,jdbcType=VARCHAR},
+      shxyl = #{shxyl,jdbcType=VARCHAR},
+      sqdm = #{sqdm,jdbcType=VARCHAR},
+      xi = #{xi,jdbcType=VARCHAR},
+      xiaosuanyan = #{xiaosuanyan,jdbcType=VARCHAR},
+      xuanfuwu = #{xuanfuwu,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      yxsy = #{yxsy,jdbcType=VARCHAR},
+      zjhw = #{zjhw,jdbcType=VARCHAR},
+      zongdan = #{zongdan,jdbcType=VARCHAR},
+      zongling = #{zongling,jdbcType=VARCHAR},
+      zongyingdu = #{zongyingdu,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

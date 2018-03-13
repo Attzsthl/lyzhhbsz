@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.szht.dao.BctbhbMapper" >
+  <resultMap id="BaseResultMap" type="com.szht.model.Bctbhb" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dmmc" property="dmmc" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="gmsytb" property="gmsytb" jdbcType="DOUBLE" />
+    <result column="adtb" property="adtb" jdbcType="DOUBLE" />
+    <result column="zltb" property="zltb" jdbcType="DOUBLE" />
+    <result column="gmsyhb" property="gmsyhb" jdbcType="DOUBLE" />
+    <result column="adhb" property="adhb" jdbcType="DOUBLE" />
+    <result column="zlhb" property="zlhb" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, dmmc, year, month, gmsytb, adtb, zltb, gmsyhb, adhb, zlhb
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.szht.model.BctbhbExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bctbhb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bctbhb
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bctbhb
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.szht.model.BctbhbExample" >
+    delete from bctbhb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szht.model.Bctbhb" >
+    insert into bctbhb (id, dmmc, year, 
+      month, gmsytb, adtb, 
+      zltb, gmsyhb, adhb, zlhb
+      )
+    values (#{id,jdbcType=INTEGER}, #{dmmc,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, 
+      #{month,jdbcType=INTEGER}, #{gmsytb,jdbcType=DOUBLE}, #{adtb,jdbcType=DOUBLE}, 
+      #{zltb,jdbcType=DOUBLE}, #{gmsyhb,jdbcType=DOUBLE}, #{adhb,jdbcType=DOUBLE}, #{zlhb,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.szht.model.Bctbhb" >
+    insert into bctbhb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dmmc != null" >
+        dmmc,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="gmsytb != null" >
+        gmsytb,
+      </if>
+      <if test="adtb != null" >
+        adtb,
+      </if>
+      <if test="zltb != null" >
+        zltb,
+      </if>
+      <if test="gmsyhb != null" >
+        gmsyhb,
+      </if>
+      <if test="adhb != null" >
+        adhb,
+      </if>
+      <if test="zlhb != null" >
+        zlhb,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dmmc != null" >
+        #{dmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="gmsytb != null" >
+        #{gmsytb,jdbcType=DOUBLE},
+      </if>
+      <if test="adtb != null" >
+        #{adtb,jdbcType=DOUBLE},
+      </if>
+      <if test="zltb != null" >
+        #{zltb,jdbcType=DOUBLE},
+      </if>
+      <if test="gmsyhb != null" >
+        #{gmsyhb,jdbcType=DOUBLE},
+      </if>
+      <if test="adhb != null" >
+        #{adhb,jdbcType=DOUBLE},
+      </if>
+      <if test="zlhb != null" >
+        #{zlhb,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szht.model.BctbhbExample" resultType="java.lang.Integer" >
+    select count(*) from bctbhb
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bctbhb
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.dmmc != null" >
+        dmmc = #{record.dmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=INTEGER},
+      </if>
+      <if test="record.gmsytb != null" >
+        gmsytb = #{record.gmsytb,jdbcType=DOUBLE},
+      </if>
+      <if test="record.adtb != null" >
+        adtb = #{record.adtb,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zltb != null" >
+        zltb = #{record.zltb,jdbcType=DOUBLE},
+      </if>
+      <if test="record.gmsyhb != null" >
+        gmsyhb = #{record.gmsyhb,jdbcType=DOUBLE},
+      </if>
+      <if test="record.adhb != null" >
+        adhb = #{record.adhb,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zlhb != null" >
+        zlhb = #{record.zlhb,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bctbhb
+    set id = #{record.id,jdbcType=INTEGER},
+      dmmc = #{record.dmmc,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=INTEGER},
+      month = #{record.month,jdbcType=INTEGER},
+      gmsytb = #{record.gmsytb,jdbcType=DOUBLE},
+      adtb = #{record.adtb,jdbcType=DOUBLE},
+      zltb = #{record.zltb,jdbcType=DOUBLE},
+      gmsyhb = #{record.gmsyhb,jdbcType=DOUBLE},
+      adhb = #{record.adhb,jdbcType=DOUBLE},
+      zlhb = #{record.zlhb,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.szht.model.Bctbhb" >
+    update bctbhb
+    <set >
+      <if test="dmmc != null" >
+        dmmc = #{dmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="gmsytb != null" >
+        gmsytb = #{gmsytb,jdbcType=DOUBLE},
+      </if>
+      <if test="adtb != null" >
+        adtb = #{adtb,jdbcType=DOUBLE},
+      </if>
+      <if test="zltb != null" >
+        zltb = #{zltb,jdbcType=DOUBLE},
+      </if>
+      <if test="gmsyhb != null" >
+        gmsyhb = #{gmsyhb,jdbcType=DOUBLE},
+      </if>
+      <if test="adhb != null" >
+        adhb = #{adhb,jdbcType=DOUBLE},
+      </if>
+      <if test="zlhb != null" >
+        zlhb = #{zlhb,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.szht.model.Bctbhb" >
+    update bctbhb
+    set dmmc = #{dmmc,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      gmsytb = #{gmsytb,jdbcType=DOUBLE},
+      adtb = #{adtb,jdbcType=DOUBLE},
+      zltb = #{zltb,jdbcType=DOUBLE},
+      gmsyhb = #{gmsyhb,jdbcType=DOUBLE},
+      adhb = #{adhb,jdbcType=DOUBLE},
+      zlhb = #{zlhb,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

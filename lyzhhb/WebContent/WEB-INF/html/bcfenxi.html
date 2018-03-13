@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="app/js/jquery-3.1.1.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/table.css">
+		<link rel="stylesheet" href="http://112.33.15.169:8181/arcgis_js_api/library/3.21/3.21/esri/themes/calcite/dijit/calcite.css ">
+	    <link rel="stylesheet" href="http://112.33.15.169:8181/arcgis_js_api/library/3.21/3.21/esri/css/esri.css" />
+	    <script type="text/javascript" src="http://112.33.15.169:8181/arcgis_js_api/library/3.21/3.21/init.js"></script>
+		<script>
+		var colors=[[255,235,230],[200,200,230],[0,177,240],[146,207,81],[254,253,7],[247,103,3],[248,6,2]];
+		
+			//		高锰酸盐、氨氮、总磷
+			//一类 	2		0.15	0.02
+			//二类 	4		0.5		0.1
+			//三类 	6		1		0.2
+			//四类 	10		1.5		0.3
+			//五类 	15		2		0.4
+			var gmsy=[0,2,4,6,10,15];
+			var ad=[0,0.15,0.5,1,1.5,2];
+			var zl=[0,0.02,0.1,0.2,0.3,0.4];
+			var parm=[gmsy,ad,zl];
+			function addarrow(parmeter){
+				if(parmeter==null)
+					return "无数据";
+				else if(parmeter>0)
+					return '<font style="color: red;">'+(parmeter * 100).toFixed(0)+'%</font><img style="width: 15px;" src="images/uparrow.png"/>';
+				else
+					return '<font style="color: green;">'+(parmeter * 100).toFixed(0)+'%</font>';
+			}
+			function changecolor(parmeter,type,mubiao){
+				if(parmeter>parm[type][mubiao])
+					return '<font style="color: red;">'+parmeter.toFixed(2)+'</font>';
+				else
+					return '<font style="color: green;">'+parmeter.toFixed(2)+'</font>';
+			}
+			function isdabiao(parmeter){
+				if(parmeter=="达标"){
+					return '<font style="color: green;">'+parmeter+'</font>';
+				}else{
+					return '<font style="color: red;">'+parmeter+'</font>';
+				}
+			}
+			function changedmlbcolor(parmeter){
+				if(parmeter=="入境断面"){
+					return '<font style="color: #007EAD;">'+parmeter+'</font>';
+				}else if(parmeter=="出境断面"){
+					return '<font style="color: #339933;">'+parmeter+'</font>';
+				}else{
+					return parmeter;
+				}
+					
+			}
+			function getbcinfojson(){
+		 		var json="{";
+		 		json += "\"year\":\""+$("#year option:selected").text()+"\",";
+		 		json += "\"month\":\""+$("#month option:selected").text()+"\"";
+				json += "}";
+			 	var jsonFinal = $.parseJSON(json);
+			 	return jsonFinal;
+			}
+			function returnsymbol(shuizhi,dabiao){
+
+				var pointcolor = new sColor(colors[shuizhi]);
+				var simpleMarkerSymbol;
+				if(dabiao=="达标"){
+					console.log(dabiao)
+					simpleMarkerSymbol = new sSimpleMarkerSymbol(sSimpleMarkerSymbol.STYLE_CIRCLE);
+				}	 	
+			 	else{
+			 		simpleMarkerSymbol = new sSimpleMarkerSymbol(sSimpleMarkerSymbol.STYLE_SQUARE);
+			 	}
+				simpleMarkerSymbol.setColor(pointcolor);
+				return simpleMarkerSymbol;
+				
+			}
+			function zhushi(point,text){
+				var textSymbol=new sTextSymbol(text);
+				textSymbol.setOffset(25,-15);
+				var graphic = new sGraphic(point, textSymbol);
+				textgraphiclayer.add(graphic);
+			}
+			function search(){
+				
+				$("#content").html("");
+					$.post("bcinfo.action",getbcinfojson(),function(result){		
+						for (var i in result) {
+							for(var j in zhezhaographiclayer.graphics){
+								if(result[i].bcinfo.dmmc==zhezhaographiclayer.graphics[j].attributes.dmmc){
+									zhushi(zhezhaographiclayer.graphics[j].geometry,result[i].bcinfo.dmmc);
+									
+									var simpleMarkerSymbol=returnsymbol(result[i].muqianshuizhiInteger,result[i].dabiao);
+									zhezhaographiclayer.graphics[j].setSymbol(simpleMarkerSymbol);
+									break;
+								}
+							}
+							
+							var html=
+							'<tr><td align="right">'+changedmlbcolor(result[i].bcinfo.dmlb)+'</td><td align="right">'+result[i].bcinfo.hlmc+'</td><td align="right">'+result[i].bcinfo.dmmc+
+							'</td><td align="right">'+result[i].shuizhi+'</td><td align="right">'+result[i].mubiaoshuizhi+'</td><td align="right">'+isdabiao(result[i].dabiao)+
+							'</td><td align="right">'+changecolor(result[i].bc.gmsy,0,result[i].bcinfo.mubiao)+'</td><td align="right">'+changecolor(result[i].bc.ad,1,result[i].bcinfo.mubiao)+'</td><td align="right">'+changecolor(result[i].bc.zl,2,result[i].bcinfo.mubiao)+
+							'</td><td align="right">'+addarrow(result[i].bctbhb.gmsytb)+'</td><td align="right">'+addarrow(result[i].bctbhb.adtb)+'</td><td align="right">'+addarrow(result[i].bctbhb.zltb)+
+							'</td><td align="right">'+addarrow(result[i].bctbhb.gmsyhb)+'</td><td align="right">'+addarrow(result[i].bctbhb.adhb)+'</td><td align="right">'+addarrow(result[i].bctbhb.zlhb)+
+							'</td></tr>';
+							
+							$("#content").append(html);
+						}
+
+				},"json");
+				
+			}
+			
+			function output(){
+				var outsting="";
+				outsting+=$("#year option:selected").text()+"年"+$("#month option:selected").text()+"月"+"区域补偿断面相关指标";
+				outsting+="!@#断面类别</td>河流名称</td>断面名称</td>当月水质</td>目标水质</td>达标情况</td>当月高锰酸盐指数</td>当月氨氮</td>当月总磷</td>同比高锰酸盐指数</td>同比氨氮</td>同比总磷</td>环比高锰酸盐指数</td>环比氨氮</td>环比总磷</td>";
+				$("#content tr").each(function(){
+					outsting+="!@#"+$(this).html();
+				});
+				$("#arrays").val(outsting);
+				$("#submitinfo").submit();
+
+			}
+			
+
+		</script>
+	</head>
+	<body>
+		<!--<div style="width: 100%;text-align: center;">
+			<font style="font-family: YouYuan;font-size: 30px;font-weight: 600">区域补偿断面相关指标分析</font>
+		</div>-->
+		<form id="submitinfo" hidden="hidden" method='post' action='outputbc.action'>
+			<input type='hidden' id="arrays" name="arrays">
+		</form>
+		<div class="selectlayer" style="float: left;margin-right: 50px;margin-bottom: 5px;">
+		<span>年份:</span>		
+			<select id="year" onchange="search()">
+				<option>2011</option>
+				<option>2012</option>
+				<option>2013</option>
+				<option>2014</option>
+				<option>2015</option>
+			</select>
+		</div>
+		<div class="selectlayer" style="float: left;margin-right: 50px; margin-bottom: 5px;">
+		<span>月份:</span>	
+			<select id="month" onchange="search()" >
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+				<option>9</option>
+				<option>10</option>
+				<option>11</option>
+				<option>12</option>
+			</select>
+		</div>
+		<div class="selectlayer" style="margin-bottom: 5px;">
+			<button onclick="output()">导出</button>
+		</div>
+		<div style="width: 100%">
+			<table style="width: 1200px;margin: auto;" border="1" class="hovertable">
+				<thead>
+					<tr>
+						<th colspan="6">基本信息</th>
+						<th colspan="3">当前月份检测数据</th>
+						<th colspan="3">同比情况</th>
+						<th colspan="3">环比情况</th>
+					</tr>
+					<tr>
+						<th style="width: 80px;">
+							断面属性
+						</th>
+						<th style="width: 100px;">
+							河流名称
+						</th>
+						<th style="width: 100px;">
+							监测断面
+						</th>
+						<th style="width: 95px;">
+							当月水质
+						</th>
+						<th style="width: 95px;">
+							考核水质
+						</th>
+						<th style="width: 95px;">
+							是否达标
+						</th>
+						<th style="width: 120px;">
+							高锰酸盐指数
+						</th>
+						<th style="width: 70px;">
+							氨氮
+						</th>
+						<th style="width: 70px;">
+							总磷
+						</th>
+						<th style="width: 120px;">
+							高锰酸盐指数
+						</th>
+						<th style="width: 70px;">
+							氨氮
+						</th>
+						<th style="width: 70px;">
+							总磷
+						</th>
+						<th style="width: 120px;">
+							高锰酸盐指数
+						</th>
+						<th style="width: 70px;">
+							氨氮
+						</th>
+						<th style="width: 70px;">
+							总磷
+						</th>
+					</tr>
+				</thead>
+				<tbody id="content">
+	
+				</tbody>
+			</table>
+		</div>
+		<div id="map" style="width: 1200px;height: 370px;margin:auto;color: black;margin-top: 15px;">		
+		</div>
+		<script>
+			require([
+			"dojo/parser",
+			"tdlib/TDTLayer",
+			"tdlib/TDTImageLayer",
+			"tdlib/TDTAnnoLayer",
+			"esri/map",
+			"esri/layers/ArcGISDynamicMapServiceLayer",
+			"esri/symbols/SimpleFillSymbol",
+			"esri/symbols/SimpleLineSymbol",
+			"esri/Color",
+			"esri/layers/FeatureLayer",
+			"esri/dijit/Search",
+			"esri/geometry/Point",
+			"esri/graphic",
+			"esri/symbols/SimpleMarkerSymbol",
+			"esri/symbols/PictureMarkerSymbol",
+			"esri/layers/GraphicsLayer",
+			"esri/tasks/query",
+			"esri/tasks/QueryTask",
+			"esri/symbols/TextSymbol",
+			"dojo/domReady!"
+		], function(
+			parser,TDTLayer, TDTImageLayer, TDTAnnoLayer, Map, ArcGISDynamicMapServiceLayer, SimpleFillSymbol,
+			SimpleLineSymbol, Color, FeatureLayer, Search, Point,Graphic, SimpleMarkerSymbol,PictureMarkerSymbol,GraphicsLayer, Query, QueryTask,
+			TextSymbol
+		) {
+	esri.config.defaults.io.proxyUrl= "http://123.206.213.109:8080/Java/proxy.jsp";
+	
+	esri.config.defaults.io.alwaysUseProxy= false;
+	
+	esri.config.defaults.io.corsDetection=false;
+	sGraphic=Graphic;
+	sColor=Color;
+	sTextSymbol=TextSymbol;
+	sSimpleMarkerSymbol=SimpleMarkerSymbol;
+			/*设置视域*/
+	startExtent = new esri.geometry.Extent({
+		"xmin": 118.574979,
+		"ymin": 31.112567,
+		"xmax": 119.948170,
+		"ymax": 31.734767,
+		"spatialReference": {
+			"wkid": 4326
+		}
+	});
+	/*地图信息*/
+	map = new Map("map", {
+		showLabels: true,
+		extent: startExtent,
+		logo: false,
+		showSlider: true,
+		sliderPosition: 'top-left',
+        force3DTransforms: true,
+        optimizePanAnimation: true,
+	});
+
+	var tdtLayer = new TDTLayer(); //天地图矢量
+	var imgLayer = new TDTImageLayer(); //天地图影像
+	var annolayer = new TDTAnnoLayer(); //天地图标注
+	map.addLayer(imgLayer);
+	map.addLayer(tdtLayer);	
+    map.addLayer(annolayer);
+    
+   	qybcurl = "http://112.33.15.169:6868/arcgis/rest/services/liyangxin/qybcdm/MapServer";
+	parcelsURLzhezhao = "http://112.33.15.169:6868/arcgis/rest/services/liyangxin/zhezhao/MapServer/0";
+	
+		function mapReady() {
+				
+		zhezhaographiclayer=new GraphicsLayer();
+		map.addLayer(zhezhaographiclayer);
+		
+		textgraphiclayer=new GraphicsLayer();
+		map.addLayer(textgraphiclayer);
+		
+		queryTask = new QueryTask(parcelsURLzhezhao);
+		query = new Query();
+		query.returnGeometry = true;
+		query.where = "1 = 1";
+		queryTask.execute(query, function(results) {
+			var zhezhaocolor = new Color([213, 215, 222,0.3]);
+			simpleFillSymbol = new SimpleFillSymbol();
+			simpleFillSymbol.setColor(zhezhaocolor);
+			graphic = new Graphic(results.features[0].geometry, simpleFillSymbol);
+			//select.add(graphic);
+			
+			zhezhaographiclayer.add(graphic);
+		});
+
+		queryTask1 = new QueryTask(qybcurl+'/0');
+		query1 = new Query();
+		query1.returnGeometry = true;
+		query1.where = "1 = 1";
+		queryTask1.execute(query1, function(results) {
+			var pointcolor = new Color([255,235,230]);
+			var simpleMarkerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE);
+			simpleMarkerSymbol.setColor(pointcolor);
+			for(var i in results.features){
+				graphic = new Graphic(results.features[i].geometry, simpleMarkerSymbol,{"dmmc":results.features[i].attributes.name},null);
+				zhezhaographiclayer.add(graphic);
+				
+			}
+			search();
+		});
+
+	}
+
+	mapReady();
+		});
+		</script>
+	</body>
+</html>

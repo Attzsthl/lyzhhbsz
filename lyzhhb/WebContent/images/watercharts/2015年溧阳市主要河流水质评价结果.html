@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+            <table class = "tables">
+                <thead>
+                  <tr>
+                    <th>养殖场名</th>
+                    <th>负责人</th>
+                    <th>联系电话</th>
+                    <th>所在禁养区</th>
+                  </tr>
+                <thead>
+                <tbody id="yzccontent">
+                    <td>111</td>
+                    <td>222</td>
+                    <td>333</td>
+                    <td>444</td>
+                </tbody>
+            </table>
+        <div id="container" style="min-width: 400px;height:400px"></div>
+        <script>
+            $(function () {
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '2015年溧阳市主要河流水质评价结果'
+        },
+        tooltip: {
+            headerFormat: '{series.name}<br>',
+            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '百分比',
+            data: [
+                ['劣Ⅴ类',   8.3],
+                ['Ⅲ类',      50.0],
+                ['Ⅳ类', 41.7]
+            ]
+        }],
+        credits:{
+                            enabled:false // 禁用版权信息
+                },
+        colors: ['#444444',  '#FFDD55','#A42D00','#AAAAAA','#FFCC22']        
+    });
+});
+        </script>
+    </body>
+</html>

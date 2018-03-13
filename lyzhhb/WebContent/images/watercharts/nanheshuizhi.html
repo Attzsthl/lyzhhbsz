@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+        <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+            <!--<table class = "tables">
+                <thead>
+                  <tr>
+                    <th>养殖场名</th>
+                    <th>负责人</th>
+                    <th>联系电话</th>
+                    <th>所在禁养区</th>
+                  </tr>
+                <thead>
+                <tbody id="yzccontent">
+                    <td>111</td>
+                    <td>222</td>
+                    <td>333</td>
+                    <td>444</td>
+                </tbody>
+            </table>-->
+        <div id="container" style="min-width: 400px;height:400px"></div>
+        <script>
+            var chart = new Highcharts.Chart('container', {
+title: {
+    text: '“十二五”南河水质综合污染指数年际变化情况',
+    x: -20
+},
+
+xAxis: {
+    categories: ['2011', '2012', '2013', '2014', '2015']
+},
+yAxis: {
+    title: {
+        text: ''
+    },
+    plotLines: [{
+        value: 0,
+        width: 1,
+        color: '#808080'
+    }]
+},
+tooltip: {
+    valueSuffix: ''
+},
+legend: {
+    layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'middle',
+    borderWidth: 0
+},
+series: [{
+    name: '综合污染指数',
+    data: [0.51, 0.50, 0.50, 0.51, 0.48]
+}],
+credits:{
+                            enabled:false // 禁用版权信息
+                },
+});
+        </script>
+    </body>
+</html>

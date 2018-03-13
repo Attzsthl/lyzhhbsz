@@ -1,0 +1,57 @@
+<html>
+        <head>
+            <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+            <script src="http://cdn.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+        <link rel="stylesheet" href="../tongji.css">
+        </head>
+        <body>
+       
+            <div id="container" style="min-width: 400px;height:400px"></div>
+            <script>
+                $(function () {
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: '2015年溧阳首要污染物出现频率'
+            },
+            tooltip: {
+                headerFormat: '{series.name}<br>',
+                pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '出现频率',
+                data: [
+                    ['臭氧',   17.4],
+                    ['二氧化氮',      17.4],
+                    ['二氧化硫', 7.6],
+                    ['细颗粒物',    26.7],
+                    ['一氧化碳',     7.1],
+                    ['可吸入颗粒物',     24.1]
+                ]
+            }],
+            credits:{
+                                enabled:false // 禁用版权信息
+                    },
+            colors: ['#E63F00', '#AAAAAA', '#FFBB00','#7700FF','#66FF66','#9999FF']        
+        });
+    });
+            </script>
+        </body>
+    </html>
